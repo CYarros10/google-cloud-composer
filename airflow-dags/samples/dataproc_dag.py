@@ -13,30 +13,18 @@ from airflow.providers.google.cloud.operators.dataproc import (
     DataprocUpdateClusterOperator,
     DataprocDeleteClusterOperator,
 )
-from airflow.providers.google.cloud.sensors.dataproc import (
-    DataprocJobSensor
-)
+from airflow.providers.google.cloud.sensors.dataproc import DataprocJobSensor
 
 
-#---------------------
+# ---------------------
 # Universal DAG info
-#---------------------
-VERSION = "v1_0_0"
-PROJECT = ""
-BUNDLE="demo"
-COMPOSER_ID="demo"
-ORG="googlecloud"
+# ---------------------
+VERSION = "v0_0_0"
 
-
-#-------------------------
+# -------------------------
 # Tags, Default Args, and Macros
-#-------------------------
-tags = [
-    f"bundle:{BUNDLE}",
-    f"project:{PROJECT}",
-    f"org:{ORG}",
-    f"composer_id:{COMPOSER_ID}"
-]
+# -------------------------
+tags = ["application:samples"]
 
 default_args = {
     "owner": "Google",
@@ -50,23 +38,23 @@ default_args = {
     "mode": "reschedule",
     "poke_interval": 60,
     "use_legacy_sql": False,
-    "sla": timedelta(minutes=1)
+    "sla": timedelta(minutes=25),
 }
 timestr = time.strftime("%Y%m%d-%H%M%S")
 user_defined_macros = {
     "project_id": "",
     "region": "us-central1",
     "dp_cluster_name": "health-check-cluster",
-    "gcs_output_location": f"gs://<bucket>/hadoop/{timestr}"
+    "gcs_output_location": f"gs://<bucket>/hadoop/{timestr}",
 }
 
-#-------------------------
+# -------------------------
 # Begin DAG Generation
-#-------------------------
+# -------------------------
 with models.DAG(
     f"dataproc_demo_{VERSION}",
     description="example dataproc dag",
-    schedule_interval="0 0 * * *",  # midnight daily
+    schedule="0 0 * * *",  # midnight daily
     tags=tags,
     default_args=default_args,
     user_defined_macros=user_defined_macros,
@@ -75,8 +63,6 @@ with models.DAG(
     max_active_runs=2,
     dagrun_timeout=timedelta(minutes=30),
 ) as dag:
-    
-
     pre_delete_cluster = DataprocDeleteClusterOperator(
         task_id="pre_delete_cluster",
         project_id="{{project_id}}",
@@ -134,7 +120,7 @@ with models.DAG(
     HIVE_JOB_CONFIG = {
         "reference": {"project_id": "{{project_id}}"},
         "placement": {"cluster_name": "{{dp_cluster_name}}"},
-        "hive_job": {"query_list": {"queries": ["SHOW DATABASES;"]}}
+        "hive_job": {"query_list": {"queries": ["SHOW DATABASES;"]}},
     }
 
     hive_job = DataprocSubmitJobOperator(
@@ -162,7 +148,11 @@ with models.DAG(
         "placement": {"cluster_name": "{{dp_cluster_name}}"},
         "hadoop_job": {
             "main_jar_file_uri": "file:///usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar",
-            "args": ["wordcount", "gs://pub/shakespeare/rose.txt", "{{gcs_output_location}}"],
+            "args": [
+                "wordcount",
+                "gs://pub/shakespeare/rose.txt",
+                "{{gcs_output_location}}",
+            ],
         },
     }
 
@@ -177,9 +167,7 @@ with models.DAG(
         "reference": {"project_id": "{{project_id}}"},
         "placement": {"cluster_name": "{{dp_cluster_name}}"},
         "spark_job": {
-            "jar_file_uris": [
-                "file:///usr/lib/spark/examples/jars/spark-examples.jar"
-            ],
+            "jar_file_uris": ["file:///usr/lib/spark/examples/jars/spark-examples.jar"],
             "main_class": "org.apache.spark.examples.SparkPi",
         },
     }
@@ -189,11 +177,11 @@ with models.DAG(
         job=SPARK_JOB_CONFIG,
         region="{{region}}",
         project_id="{{project_id}}",
-        asynchronous=True
+        asynchronous=True,
     )
 
     spark_job_async_sensor = DataprocJobSensor(
-        task_id='spark_task_async_sensor_task',
+        task_id="spark_task_async_sensor_task",
         region="{{region}}",
         project_id="{{project_id}}",
         dataproc_job_id="{{ ti.xcom_pull('spark_job_async') }}",
@@ -207,5 +195,11 @@ with models.DAG(
         trigger_rule="all_done",
     )
 
-    pre_delete_cluster >> create_cluster >> scale_cluster >> [spark_job_async_sensor,hive_job,pig_job,hadoop_job] >> post_delete_cluster
+    (
+        pre_delete_cluster
+        >> create_cluster
+        >> scale_cluster
+        >> [spark_job_async_sensor, hive_job, pig_job, hadoop_job]
+        >> post_delete_cluster
+    )
     scale_cluster >> spark_job_async >> spark_job_async_sensor

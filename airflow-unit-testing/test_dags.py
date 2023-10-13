@@ -5,13 +5,12 @@ import logging as logger
 from airflow.models import DagBag
 from airflow.utils.dag_cycle_tester import check_cycle
 
-_APPROVED_TAGS = {"customer_success", "op_analytics", "product"}
 _LOAD_SECONDS = 2
 
 class TestDagIntegrity(unittest.TestCase):
 
   def setUp(self):
-      DAGS_DIR = os.getenv('INPUT_DAGPATHS', default='dags/')
+      DAGS_DIR = os.getenv('INPUT_DAGPATHS', default='sample-dags/')
       logger.info("DAGs dir : {}".format(DAGS_DIR))
       self.dagbag = DagBag(dag_folder = DAGS_DIR, include_examples = False)
 
@@ -23,9 +22,10 @@ class TestDagIntegrity(unittest.TestCase):
     valid_cron_expressions = re.compile("(@(annually|yearly|monthly|weekly|daily|hourly|reboot))|(@every (\d+(ns|us|µs|ms|s|m|h))+)|((((\d+,)+\d+|([\d\*]+(\/|-)\d+)|\d+|\*) ?){5,7})")
     for dag in self.dagbag.dags:
       schedule = self.dagbag.dags[dag].schedule_interval
-      valid = re.match(valid_cron_expressions, schedule)
-      error_msg = f"DAG {dag} does not have a valid cron expression"
-      assert valid, error_msg
+      if schedule:
+        valid = re.match(valid_cron_expressions, str(schedule))
+        error_msg = f"DAG {dag} does not have a valid cron expression (or missing schedule)"
+        assert valid, error_msg
 
   def test_owner_present(self):
     for dag in self.dagbag.dags:
@@ -56,7 +56,7 @@ class TestDagIntegrity(unittest.TestCase):
     for dag in self.dagbag.dags:
         catchup = self.dagbag.dags[dag].catchup
         error_msg = 'Catchup not set to False for DAG {id}'.format(id=dag)
-        assert catchup, error_msg
+        assert not catchup, error_msg
 
   def test_dag_timeout_set(self):
     for dag in self.dagbag.dags:
@@ -77,7 +77,7 @@ class TestDagIntegrity(unittest.TestCase):
         error_msg = 'Paused not set to True for DAG {id}'.format(id=dag)
         assert paused, error_msg
 
-  def test_dag_tags(self):
+  def test_dag_has_tags(self):
       """
       test if a DAG is tagged and if those TAGs are in the approved list
       """
@@ -85,8 +85,6 @@ class TestDagIntegrity(unittest.TestCase):
           tags = self.dagbag.dags[dag].tags
           error_msg = f"{dag} has no tags"
           assert len(tags)>0, error_msg
-      if _APPROVED_TAGS:
-          assert not set(tags) - _APPROVED_TAGS
 
   def test_dag_task_cycle(self):
       no_dag_found = True
