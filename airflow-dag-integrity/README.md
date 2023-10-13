@@ -10,7 +10,7 @@ Use [black](https://pypi.org/project/black/), an uncompromising Python code form
 
 ## Integrity Tests
 
-Follow [Google Cloud Blog - Optimize Cloud Composer via Better Airflow DAGs](https://cloud.google.com/blog/products/data-analytics/optimize-cloud-composer-via-better-airflow-dags) - a guide containing a generalized checklist of activities when authoring Apache Airflow DAGs. 
+Follow [Google Cloud Blog: Optimize Cloud Composer via Better Airflow DAGs](https://cloud.google.com/blog/products/data-analytics/optimize-cloud-composer-via-better-airflow-dags) - a guide containing a generalized checklist of activities when authoring Apache Airflow DAGs. 
 
 [test_dags.py](https://github.com/CYarros10/google-cloud-composer/blob/main/airflow-dag-integrity/test_dags.py) enforces the following best practices from the guide above and provides many deprecation warnings:
 
