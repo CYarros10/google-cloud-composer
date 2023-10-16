@@ -1,3 +1,9 @@
+"""
+A DAG in a collection of samples for getting started with
+Google Cloud services, or running proof-of-concepts, demos,
+etc. on Cloud Composer.
+"""
+
 from datetime import datetime, timedelta
 from airflow import models
 import time

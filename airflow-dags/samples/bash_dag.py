@@ -1,4 +1,9 @@
-#!/usr/bin/python3
+"""
+A DAG in a collection of samples for getting started with
+Google Cloud services, or running proof-of-concepts, demos,
+etc. on Cloud Composer.
+"""
+
 from airflow import models
 from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta

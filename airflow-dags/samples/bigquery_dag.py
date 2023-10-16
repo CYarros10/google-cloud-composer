@@ -1,4 +1,7 @@
 """
+A DAG in a collection of samples for getting started with
+Google Cloud services, or running proof-of-concepts, demos,
+etc. on Cloud Composer.
 """
 
 from datetime import timedelta, datetime
@@ -39,7 +42,7 @@ VERSION = "v0_0_0"
 # -------------------------
 # Tags, Default Args, and Macros
 # -------------------------
-tags = []
+tags = ["application:samples"]
 
 default_args = {
     "owner": "Google",
@@ -106,7 +109,7 @@ class CustomOperatorRowCheck(BigQueryTableCheckOperator):
 # -------------------------
 with models.DAG(
     f"bigquery_dag_{VERSION}",
-    description="",
+    description="Sample DAG for BigQuery operations.",
     schedule_interval="0 0 * * *",  # midnight daily
     tags=tags,
     default_args=default_args,

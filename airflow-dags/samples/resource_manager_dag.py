@@ -1,5 +1,7 @@
 """
-Airflow Custom Operators for Resource Manager
+A DAG in a collection of samples for getting started with
+Google Cloud services, or running proof-of-concepts, demos,
+etc. on Cloud Composer.
 """
 
 import logging
