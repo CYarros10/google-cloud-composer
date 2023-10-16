@@ -14,13 +14,11 @@ A collection of Google Cloud Composer assets
 
 *   [Airflow Schedule Interval 101](https://towardsdatascience.com/airflow-schedule-interval-101-bbdda31cc463)
 
+## Sample Code
 
-## Samples
+### Airflow DAGs
 
-Use these solutions as a reference for your own or extend them to fit your
-particular use case.
-
-### Airflow Samples
+#### Samples
 
 *   [Bash DAG](airflow-dags/samples/bash_dag.py) - Sample DAG with a bash operator.
 *   [BigQuery DAG](airflow-dags/samples/bigquery_dag.py) - Sample DAG with BigQuery operations.
@@ -30,16 +28,34 @@ particular use case.
 *   [Dataproc DAG](airflow-dags/samples/dataproc_dag.py) - Sample DAG with Dataproc operations.
 *   [Dataproc Serverless DAG](airflow-dags/samples/dataproc_serverless_dag.py) - Sample DAG with Dataproc Serverless operations.
 *   [Dataproc Workflow Template DAG](airflow-dags/samples/dataproc_workflow_template_dag.py) - Sample DAG with Dataproc Workflow Template operations.
-*   [PubSub Target DAG](airflow-dags/samples/pubsub_target_dag.py) - Sample of multi-dag dependency that acts as a target for a separate PubSub Trigger DAG.  
-*   [PubSub Trigger Single DAG](airflow-dags/samples/pubsub_trigger_single_dag.py) - Sample of multi-dag dependency that acts as a trigger for a separate DAG.  
 *   [Python DAG](airflow-dags/samples/python_dag.py) - Sample DAG with python operator.
 *   [Resource Manager DAG](airflow-dags/samples/resource_manager_dag.py) - Sample DAG with Resource Manager operations.
 
+
+#### Alerting
+
+*   [Email Alerts](airflow-dags/alerting/email_alert_dag.py) - Sample of a DAG that sends an email on DAG failure or SLA miss. requires email setup beforehand.
+*   [Slack Alerts](airflow-dags/alerting/slack_alert_dag.py) - Sample of a DAG that sends a message to a slack channel on DAG failure or SLA miss. requires slack channel setup beforehand.
+
+#### Config Driven DAGs
+
+*   [PubSub Target DAG](airflow-dags/config-driven-dags/dags/resource_manager.py) - Sample of a DAG that loads a YAML file for config variables.
+
+#### Multi-DAG Dependencies
+
+*   [PubSub Target DAG](airflow-dags/multi-dag-dependencies/pubsub_target_dag.py) - Sample of multi-dag dependency that acts as a target for a separate PubSub Trigger DAG.  
+*   [PubSub Trigger DAG List](airflow-dags/samples/pubsub_trigger_dag_list.py) - Sample of multi-dag dependency that acts as a trigger for a list of separate DAGs.  
+*   [PubSub Trigger Single DAG](airflow-dags/samples/pubsub_trigger_single_dag.py) - Sample of multi-dag dependency that acts as a trigger for a separate DAG.  
+
+#### Oozie Functionality in Airflow
+
+*   [Should-start SLA](airflow-dags/oozie-functionality/should-start-sla.py) - Reverse engineer the should-start SLA from Oozie.
+
 ### Composer Samples
+
 *   [Composer CICD](composer-cicd/) - A sample CICD pipeline using Cloud Build to deploy dags to a Cloud Composer environment.
 *   [Composer Terraform](composer-terraform/) - A collection of terraform modules for deploying Cloud Composer environments, cicd processes,
     and monitoring dashboards
-
 
 ## Tools
 
