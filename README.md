@@ -9,6 +9,8 @@ A collection of Google Cloud Composer assets
 *   [What is Cloud Composer?](https://cloud.google.com/blog/topics/developers-practitioners/what-cloud-composer)
 *   [Optimize Cloud Composer via Better Airflow DAGs](https://cloud.google.com/blog/products/data-analytics/optimize-cloud-composer-via-better-airflow-dags)
 *   [Reduce Airflow DAG Parse Times in Cloud Composer](https://cloud.google.com/blog/products/data-analytics/reduce-airflow-dag-parse-times-in-cloud-composer)
+*   [Cloud Composer Tenancy Strategies](https://cloud.google.com/blog/products/data-analytics/a-cloud-composer-tenancy-case-study)
+
 
 ### Airflow Guides
 
