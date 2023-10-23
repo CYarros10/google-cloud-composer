@@ -1,3 +1,39 @@
+# Copyright 2018 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the u"License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#            http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an u"AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""
+# DAG Quality Tests
+
+Follow [Google Cloud Blog: Optimize Cloud Composer via Better Airflow DAGs](https://cloud.google.com/blog/products/data-analytics/optimize-cloud-composer-via-better-airflow-dags) - a guide containing a generalized checklist of activities when authoring Apache Airflow DAGs. 
+
+[test_dags.py](https://github.com/CYarros10/google-cloud-composer/blob/main/airflow-dag-integrity/test_dags.py) enforces the following best practices from the guide above and provides many deprecation warnings:
+
+* No Import Errors
+* Valid Schedule Interval
+* Owner Present
+* SLA Present
+* SLA Less Than Timeout
+* Retries Present and value = 1-4
+* Catchup Set to False by Default
+* DAG Timeout set
+* DAG Description set
+* DAG Paused on Create
+* DAG Valid Tags
+* DAG Check Task Cycle
+* DAG Import Time Less Than 2 Seconds
+"""
+
 import os
 import time
 import unittest
@@ -7,10 +43,10 @@ from airflow.utils.dag_cycle_tester import check_cycle
 
 _LOAD_SECONDS = 2
 
-class TestDagIntegrity(unittest.TestCase):
+class TestDagQuality(unittest.TestCase):
 
   def setUp(self):
-      DAGS_DIR = os.getenv('INPUT_DAGPATHS', default='sample-dags/')
+      DAGS_DIR = os.getenv('INPUT_DAGPATHS', default='sample-dags/') # either set INPUT_DAGPATHS externally or pass default here
       logger.info("DAGs dir : {}".format(DAGS_DIR))
       self.dagbag = DagBag(dag_folder = DAGS_DIR, include_examples = False)
 
@@ -110,4 +146,4 @@ class TestDagIntegrity(unittest.TestCase):
       error_msg = f"DAG file {dag_file} not parsed under threshold time."
       assert total < _LOAD_SECONDS, error_msg
 
-suite = unittest.TestLoader().loadTestsFromTestCase(TestDagIntegrity)
+suite = unittest.TestLoader().loadTestsFromTestCase(TestDagQuality)

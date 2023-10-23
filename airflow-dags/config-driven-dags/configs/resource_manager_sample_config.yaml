@@ -3,3 +3,4 @@ organization_id: "827442274178"
 folder_id: "1048237000491"
 folder_regex_match: "^CY-"
 project_regex_match: "^cy-"
+max_active_runs: 20

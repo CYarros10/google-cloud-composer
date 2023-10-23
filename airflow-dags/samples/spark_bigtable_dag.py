@@ -12,7 +12,6 @@ import time
 from airflow.providers.google.cloud.operators.dataproc import (
     DataprocCreateClusterOperator,
     DataprocSubmitJobOperator,
-    DataprocUpdateClusterOperator,
     DataprocDeleteClusterOperator,
 )
 from airflow.providers.google.cloud.sensors.dataproc import DataprocJobSensor
@@ -54,7 +53,7 @@ user_defined_macros = {
 # Begin DAG Generation
 # -------------------------
 with models.DAG(
-    f"dataproc_demo_{VERSION}",
+    f"spark_bigtable_{VERSION}",
     description="example dataproc dag",
     schedule="0 0 * * *",  # midnight daily
     tags=tags,
@@ -98,74 +97,7 @@ with models.DAG(
         trigger_rule="all_done",
     )
 
-    scale_cluster = DataprocUpdateClusterOperator(
-        task_id="scale_cluster",
-        project_id="{{project_id}}",
-        region="{{region}}",
-        cluster_name="{{dp_cluster_name}}",
-        graceful_decommission_timeout={"seconds": 600},
-        cluster={
-            "config": {
-                "worker_config": {"num_instances": 3},
-                "secondary_worker_config": {"num_instances": 3},
-            }
-        },
-        update_mask={
-            "paths": [
-                "config.worker_config.num_instances",
-                "config.secondary_worker_config.num_instances",
-            ]
-        },
-        deferrable=True,
-    )
-
     # https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs
-    HIVE_JOB_CONFIG = {
-        "reference": {"project_id": "{{project_id}}"},
-        "placement": {"cluster_name": "{{dp_cluster_name}}"},
-        "hive_job": {"query_list": {"queries": ["SHOW DATABASES;"]}},
-    }
-
-    hive_job = DataprocSubmitJobOperator(
-        task_id="hive_job",
-        job=HIVE_JOB_CONFIG,
-        region="{{region}}",
-        project_id="{{project_id}}",
-    )
-
-    PIG_JOB_CONFIG = {
-        "reference": {"project_id": "{{project_id}}"},
-        "placement": {"cluster_name": "{{dp_cluster_name}}"},
-        "pig_job": {"query_list": {"queries": ["define sin HiveUDF('sin');"]}},
-    }
-
-    pig_job = DataprocSubmitJobOperator(
-        task_id="pig_job",
-        job=PIG_JOB_CONFIG,
-        region="{{region}}",
-        project_id="{{project_id}}",
-    )
-
-    HADOOP_JOB_CONFIG = {
-        "reference": {"project_id": "{{project_id}}"},
-        "placement": {"cluster_name": "{{dp_cluster_name}}"},
-        "hadoop_job": {
-            "main_jar_file_uri": "file:///usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar",
-            "args": [
-                "wordcount",
-                "gs://pub/shakespeare/rose.txt",
-                "{{gcs_output_location}}",
-            ],
-        },
-    }
-
-    hadoop_job = DataprocSubmitJobOperator(
-        task_id="hadoop_job",
-        job=HADOOP_JOB_CONFIG,
-        region="{{region}}",
-        project_id="{{project_id}}",
-    )
-
     SPARK_JOB_CONFIG = {
         "reference": {"project_id": "{{project_id}}"},
         "placement": {"cluster_name": "{{dp_cluster_name}}"},
@@ -201,8 +133,8 @@ with models.DAG(
     (
         pre_delete_cluster
         >> create_cluster
-        >> scale_cluster
-        >> [spark_job_async_sensor, hive_job, pig_job, hadoop_job]
+        >> spark_job_async
+        >> spark_job_async_sensor
         >> post_delete_cluster
     )
-    scale_cluster >> spark_job_async >> spark_job_async_sensor
+    

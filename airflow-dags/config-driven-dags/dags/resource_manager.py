@@ -6,13 +6,13 @@ import logging
 from airflow import models
 from datetime import datetime, timedelta
 from airflow.operators.python_operator import PythonOperator
-from utils.tooling import load_config
+from utils.tooling import load_local_config
 import os
 
 #---------------------
 # Config 
 #---------------------
-VERSION = "v1_0_0"
+VERSION = "v0_0_0"
 
 DAG_PATH = '/home/airflow/gcs/dags/'
 config = load_config(
@@ -24,6 +24,7 @@ ORG_ID= config['organization_id']
 FOLDER_ID=config['folder_id']
 VALID_FOLDER_REGEX=config['folder_regex_match']
 VALID_PROJECT_REGEX=config['project_regex_match']
+MAX_ACTIVE_RUNS=config['max_active_runs']
 
 #-------------------------
 # Tags, Default Args, and Macros
@@ -56,7 +57,7 @@ with models.DAG(
     default_args=default_args,
     is_paused_upon_creation=True,
     catchup=False,
-    max_active_runs=2,
+    max_active_runs=MAX_ACTIVE_RUNS,
     dagrun_timeout=timedelta(minutes=30),
 ) as dag:
     
