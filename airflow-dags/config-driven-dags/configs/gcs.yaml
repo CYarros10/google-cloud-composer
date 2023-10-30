@@ -1,0 +1,9 @@
+MAX_ACTIVE_RUNS: 5
+MAX_ACTIVE_TASKS: 10
+TIMEOUT_MINS: 20
+SLA_MINS: 10
+RETRIES: 5
+TAGS:
+- type:demo
+- customer:yahoo
+- config:gcs

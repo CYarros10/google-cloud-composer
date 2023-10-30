@@ -1,2 +1,0 @@
-max_active_runs: 10
-echo_cmd: "echo 'hello from gcs config 2'"

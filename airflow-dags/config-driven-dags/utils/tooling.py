@@ -3,7 +3,7 @@ from typing import Any
 from typing import Dict
 from google.cloud import storage
 
-def load_local_config(path: str) -> Dict[str, Any]:
+def local_config_from_local(path: str) -> Dict[str, Any]:
     """Loads and returns a local configuration file as a dictionary"""
     with open(path) as f:
         config = yaml.safe_load(f)
