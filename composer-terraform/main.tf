@@ -21,15 +21,16 @@ resource "google_project_service" "composer_api" {
 #  worker_max_count                  = var.worker_max_count
 #}
 
-module "composer-alerting" {
-  source                            = "./modules/composer-alerting"  
-  project_id                           = var.project_id
-}
+#module "composer-alerting" {
+#  source                            = "./modules/composer-alerting"  
+#  project_id                           = var.project_id
+#}
 
 module "composer-2" {
   source                            = "./modules/composer2"
   composer_environment_name         = "composer-2-small"
-  composer_image                    = "composer-2.4.1-airflow-2.5.3"
+  #composer_image                    = "composer-2.1.12-airflow-2.3.4"
+  composer_image                    = "composer-2.3.5-airflow-2.4.3"
   project_id                        = var.project_id
   project_number                    = var.project_number
   region                            = var.region
@@ -51,9 +52,9 @@ module "composer-2" {
   worker_cpu                        = var.worker_cpu
 }
 
-module "composer-cicd" {
-  source                           = "./modules/composer-cicd"  
-  region                           = var.region
-  project_id                       = var.project_id
-  github_secret                    = var.github_secret
-}
+#module "composer-cicd" {
+#  source                           = "./modules/composer-cicd"  
+#  region                           = var.region
+#  project_id                       = var.project_id
+#  github_secret                    = var.github_secret
+#}

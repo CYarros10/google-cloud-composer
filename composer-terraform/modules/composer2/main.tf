@@ -1,4 +1,10 @@
+provider "google-beta" {
+  project = var.project_id
+  region  = var.region
+}
+
 resource "google_composer_environment" "composer2" {
+  provider = google-beta
   name   = "${var.composer_environment_name}"
   project = var.project_id
   region = var.region
