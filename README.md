@@ -41,8 +41,8 @@ A collection of Google Cloud Composer assets
 
 #### Config Driven DAGs
 
-*   [Resource Manager Configurable DAG](airflow-dags/config-driven-dags/dags/resource_manager.py) - Sample of a DAG that loads a LOCAL YAML file for config variables.
-*   [Bash Configurable DAG](airflow-dags/config-driven-dags/dags/bash_echo_conf.py) - Sample of a DAG that loads a GCS YAML file for config variables.
+*   [Local Configured DAG](airflow-dags/config-driven-dags/dags/local_configured_dag.py) - Sample of a DAG that loads a LOCAL YAML file for config variables.
+*   [GCS Configured DAG](airflow-dags/config-driven-dags/dags/gcs_configured_dag.py) - Sample of a DAG that loads a GCS YAML file for config variables.
 
 #### Multi-DAG Dependencies
 
