@@ -4,21 +4,23 @@
 # git checkout bigtable-spark-connector-preview
 # cd bigtable/spark-connector-preview
 
-BIGTABLE_SPARK_PROJECT_ID=cy-artifacts
-BIGTABLE_SPARK_INSTANCE_ID=bt-test-instance
-BIGTABLE_SPARK_TABLE_NAME=test
-BIGTABLE_SPARK_DATAPROC_CLUSTER=pyspark-to-bt-test
+BIGTABLE_SPARK_PROJECT_ID=your-project
+BIGTABLE_SPARK_INSTANCE_ID=your-bigtable-instance
+BIGTABLE_SPARK_TABLE_NAME=your-bigtable-table
+BIGTABLE_SPARK_DATAPROC_CLUSTER=your-dataproc-cluster
 BIGTABLE_SPARK_DATAPROC_REGION=us-central1
 PATH_TO_PYTHON_FILE=python/word_count.py
 PATH_TO_COMPILED_JAR=java-maven/target/bigtable-spark-example-0.0.1-SNAPSHOT.jar
-BIGTABLE_SPARK_GCS_BUCKET_NAME=airflow-reporting-cy
+BIGTABLE_SPARK_GCS_BUCKET_NAME=your-gcs-bucket
 
 cd spark-to-bigtable/java-maven
 mvn clean install
 cd ..
 
-gsutil cp $PATH_TO_COMPILED_JAR gs://airflow-reporting-cy/java/
-gsutil cp $PATH_TO_PYTHON_FILE gs://airflow-reporting-cy/pyspark/word_count.py
+gsutil cp $PATH_TO_COMPILED_JAR gs://$BIGTABLE_SPARK_GCS_BUCKET_NAME/java/
+gsutil cp $PATH_TO_PYTHON_FILE gs://$BIGTABLE_SPARK_GCS_BUCKET_NAME/pyspark/word_count.py
+
+#uncomment for manual job submits
 
 # gcloud dataproc clusters create \
 # $BIGTABLE_SPARK_DATAPROC_CLUSTER --region $BIGTABLE_SPARK_DATAPROC_REGION \
