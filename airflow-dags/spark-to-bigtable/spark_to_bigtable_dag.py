@@ -35,7 +35,7 @@ timestr = time.strftime("%Y%m%d-%H%M%S")
 # Begin DAG Generation
 # -------------------------
 with models.DAG(
-    f"spark_to_bigtable_demo_v0",
+    f"spark_to_bigtable_v0_0",
     description="example spark to bigtable dag",
     schedule="0 0 * * *",  # midnight daily
     tags=["type:demo"],
@@ -46,12 +46,13 @@ with models.DAG(
     dagrun_timeout=timedelta(minutes=30),
 ) as dag:
     
-    create_cluster=False
-    project_id = "cy-artifacts"
-    cluster="pyspark-to-bigtable-test-cluster"
+    project_id = "your-project"
+    create_cluster=False # change if you want to create a cluster instead of using existing
+    cluster="your-cluster-name"
     region="us-central1"
-    bigtable_instance="bt-test-instance"
-    bigtable_table="test"
+    bigtable_instance="your-bigtable-instance"
+    bigtable_table="your-bigtable-table"
+    gcs_bucket="gcs-bucket-for-jars-and-dependencies"
 
     spark_job = DataprocSubmitJobOperator(
         task_id="spark_job",
@@ -59,9 +60,9 @@ with models.DAG(
         region=region,
         job={
             "reference": {"project_id": project_id},
-            "placement": {"cluster_name": "pyspark-to-bt-test"},
+            "placement": {"cluster_name": cluster},
             "spark_job": {
-                "jar_file_uris": ["gs://airflow-reporting-cy/java/bigtable-spark-example-0.0.1-SNAPSHOT.jar"],
+                "jar_file_uris": [f"gs://{gcs_bucket}/java/bigtable-spark-example-0.0.1-SNAPSHOT.jar"],
                 "main_class": "bigtable.spark.example.WordCount",
                 "args": [
                     project_id,
@@ -78,9 +79,9 @@ with models.DAG(
         region=region,
         job={
             "reference": {"project_id": project_id},
-            "placement": {"cluster_name": "pyspark-to-bt-test"},
+            "placement": {"cluster_name": cluster},
             "pyspark_job": {
-                "main_python_file_uri": "gs://airflow-reporting-cy/pyspark/word_count.py",
+                "main_python_file_uri": f"gs://{gcs_bucket}/pyspark/word_count.py",
                 "jar_file_uris": [
                     "gs://bigtable-spark-preview/jars/bigtable-spark-0.0.1-preview1-SNAPSHOT.jar"
                 ],
