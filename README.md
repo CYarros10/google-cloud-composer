@@ -60,6 +60,10 @@ A collection of Google Cloud Composer assets
 *   [Composer Terraform](composer-terraform/) - A collection of terraform modules for deploying Cloud Composer environments, cicd processes,
     and monitoring dashboards
 
+#### Spark to Bigtable
+
+*   [Spark to Bigtable DAG](airflow-dags/spark-to-bigtable/spark_to_bigtable_dag.py) - Sample of a DAG that reads/writes to Bigtable using Spark and PySpark.
+
 ## Tools
 
 ### Airflow DAG Development Tools
