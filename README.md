@@ -54,15 +54,15 @@ A collection of Google Cloud Composer assets
 
 *   [Should-start SLA](airflow-dags/oozie-functionality/should-start-sla.py) - Reverse engineer the should-start SLA from Oozie.
 
+#### Spark to Bigtable
+
+*   [Spark to Bigtable DAG](airflow-dags/spark-to-bigtable/spark_to_bigtable_dag.py) - Sample of a DAG that reads/writes to Bigtable using Spark and PySpark.
+
 ### Composer Samples
 
 *   [Composer CICD](composer-cicd/) - A sample CICD pipeline using Cloud Build to deploy dags to a Cloud Composer environment.
 *   [Composer Terraform](composer-terraform/) - A collection of terraform modules for deploying Cloud Composer environments, cicd processes,
     and monitoring dashboards
-
-#### Spark to Bigtable
-
-*   [Spark to Bigtable DAG](airflow-dags/spark-to-bigtable/spark_to_bigtable_dag.py) - Sample of a DAG that reads/writes to Bigtable using Spark and PySpark.
 
 ## Tools
 
