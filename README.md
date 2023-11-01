@@ -18,9 +18,19 @@ A collection of Google Cloud Composer assets
 
 ## Sample Code
 
-### Airflow DAGs
+### Airflow Samples
 
-#### Samples
+#### Alerting
+
+*   [Email Alerts](airflow-dags/alerting/email_alert_dag.py) - Sample of a DAG that sends an email on DAG failure or SLA miss. requires email setup beforehand.
+*   [Slack Alerts](airflow-dags/alerting/slack_alert_dag.py) - Sample of a DAG that sends a message to a slack channel on DAG failure or SLA miss. requires slack channel setup beforehand.
+
+#### Config Driven DAGs
+
+*   [Local Configured DAG](airflow-dags/config-driven-dags/dags/local_configured_dag.py) - Sample of a DAG that loads a LOCAL YAML file for config variables.
+*   [GCS Configured DAG](airflow-dags/config-driven-dags/dags/gcs_configured_dag.py) - Sample of a DAG that loads a GCS YAML file for config variables.
+
+#### Misc. DAGs
 
 *   [Bash DAG](airflow-dags/samples/bash_dag.py) - Sample DAG with a bash operator.
 *   [BigQuery DAG](airflow-dags/samples/bigquery_dag.py) - Sample DAG with BigQuery operations.
@@ -33,22 +43,12 @@ A collection of Google Cloud Composer assets
 *   [Python DAG](airflow-dags/samples/python_dag.py) - Sample DAG with python operator.
 *   [Resource Manager DAG](airflow-dags/samples/resource_manager_dag.py) - Sample DAG with Resource Manager operations.
 
-
-#### Alerting
-
-*   [Email Alerts](airflow-dags/alerting/email_alert_dag.py) - Sample of a DAG that sends an email on DAG failure or SLA miss. requires email setup beforehand.
-*   [Slack Alerts](airflow-dags/alerting/slack_alert_dag.py) - Sample of a DAG that sends a message to a slack channel on DAG failure or SLA miss. requires slack channel setup beforehand.
-
-#### Config Driven DAGs
-
-*   [Local Configured DAG](airflow-dags/config-driven-dags/dags/local_configured_dag.py) - Sample of a DAG that loads a LOCAL YAML file for config variables.
-*   [GCS Configured DAG](airflow-dags/config-driven-dags/dags/gcs_configured_dag.py) - Sample of a DAG that loads a GCS YAML file for config variables.
-
 #### Multi-DAG Dependencies
 
 *   [PubSub Target DAG](airflow-dags/multi-dag-dependencies/pubsub_target_dag.py) - Sample of multi-dag dependency that acts as a target for a separate PubSub Trigger DAG.  
 *   [PubSub Trigger DAG List](airflow-dags/samples/pubsub_trigger_dag_list.py) - Sample of multi-dag dependency that acts as a trigger for a list of separate DAGs.  
 *   [PubSub Trigger Single DAG](airflow-dags/samples/pubsub_trigger_single_dag.py) - Sample of multi-dag dependency that acts as a trigger for a separate DAG.  
+
 
 #### Oozie Functionality in Airflow
 
