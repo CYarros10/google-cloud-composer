@@ -15,11 +15,12 @@ from airflow.providers.google.cloud.operators.dataproc import (
     DataprocDeleteClusterOperator,
 )
 from airflow.providers.google.cloud.sensors.dataproc import DataprocJobSensor
+from airflow.operators.python import PythonOperator
 
 # ---------------------
 # Universal DAG info
 # ---------------------
-VERSION = "v0_0_0"
+VERSION = "v0_0_5"
 
 # -------------------------
 # Tags, Default Args, and Macros
@@ -46,8 +47,8 @@ timestr = time.strftime("%Y%m%d-%H%M%S")
 # Begin DAG Generation
 # -------------------------
 with models.DAG(
-    f"dataproc_template_demo_{VERSION}",
-    description="example dataproc template dag",
+    f"dataproc_dynamic_xcom_{VERSION}",
+    description="example dataproc dag",
     schedule="0 0 * * *",  # midnight daily
     tags=tags,
     default_args=default_args,
@@ -63,7 +64,12 @@ with models.DAG(
     bigtable_instance = "your-bigtable-instance"
     bigtable_table = "your-bigtable-table"
 
-    # only create infrastructure if necessary
+    def push_value_to_xcom(**kwargs):
+        task_instance = kwargs["ti"]
+        value_to_push = "cities"
+        task_instance.xcom_push(key="my_variable", value=value_to_push)
+
+    # Only create infrastructure if True
     create_cluster = False
     if create_cluster:
         pre_delete_cluster = DataprocDeleteClusterOperator(
@@ -98,7 +104,6 @@ with models.DAG(
             },
             trigger_rule="all_done",
         )
-
         post_delete_cluster = DataprocDeleteClusterOperator(
             task_id="post_delete_cluster",
             project_id=project_id,
@@ -107,56 +112,65 @@ with models.DAG(
             trigger_rule="all_done",
         )
 
-    spark_job_async = DataprocSubmitJobOperator(
-        task_id="spark_job_async",
-        project_id=project_id,
-        region=region,
-        asynchronous=True,
-        job={
-            "reference": {"project_id": project_id},
-            "placement": {"cluster_name": dp_cluster_name},
-            "spark_job": {
-                "jar_file_uris": [
-                    "file:///usr/lib/spark/external/spark-avro.jar",
-                    f"gs://{gcs_bucket_name}/jars/dataproc-templates-1.0-SNAPSHOT.jar",
-                ],
-                "main_class": "com.google.cloud.dataproc.templates.main.DataProcTemplate",  # noqa
-                "args": [
-                    "--template",
-                    "GCSTOBIGTABLE",
-                    "--templateProperty",
-                    f"project.id={project_id}",
-                    "--templateProperty",
-                    f"gcs.bigtable.input.location=gs://{gcs_bucket_name}/cities.csv",
-                    "--templateProperty",
-                    "gcs.bigtable.input.format=csv",
-                    "--templateProperty",
-                    f"gcs.bigtable.output.instance.id={bigtable_instance}",
-                    "--templateProperty",
-                    f"gcs.bigtable.output.project.id={project_id}",
-                    "--templateProperty",
-                    f"gcs.bigtable.table.name={bigtable_table}",
-                    "--templateProperty",
-                    "gcs.bigtable.column.family=cf",
-                ],
+    push_task = PythonOperator(
+        task_id="push_value",
+        python_callable=push_value_to_xcom,
+        provide_context=True,
+    )
+
+    # create spark jobs for 3 sample files
+    for i in range(0, 3):
+        # Example of appending to XCOM dynamically
+        spark_job_async = DataprocSubmitJobOperator(
+            task_id=f"spark_job_async_{i}",
+            project_id=project_id,
+            region=region,
+            asynchronous=True,
+            job={
+                "reference": {"project_id": project_id},
+                "placement": {"cluster_name": dp_cluster_name},
+                "spark_job": {
+                    "jar_file_uris": [
+                        "file:///usr/lib/spark/external/spark-avro.jar",
+                        f"gs://{gcs_bucket_name}/jars/dataproc-templates-1.0-SNAPSHOT.jar",
+                    ],
+                    "main_class": "com.google.cloud.dataproc.templates.main.DataProcTemplate",  # noqa
+                    "args": [
+                        "--template",
+                        "GCSTOBIGTABLE",
+                        "--templateProperty",
+                        f"project.id={project_id}",
+                        "--templateProperty",
+                        f"gcs.bigtable.input.location=gs://{gcs_bucket_name}/{{{{ti.xcom_pull(key='my_variable')}}}}_{i}.csv",
+                        "--templateProperty",
+                        "gcs.bigtable.input.format=csv",
+                        "--templateProperty",
+                        f"gcs.bigtable.output.instance.id={bigtable_instance}",
+                        "--templateProperty",
+                        f"gcs.bigtable.output.project.id={project_id}",
+                        "--templateProperty",
+                        f"gcs.bigtable.table.name={bigtable_table}",
+                        "--templateProperty",
+                        "gcs.bigtable.column.family=cf",
+                    ],
+                },
             },
-        },
-    )
-
-    spark_job_async_sensor = DataprocJobSensor(
-        task_id="spark_task_async_sensor_task",
-        project_id=project_id,
-        region=region,
-        dataproc_job_id="{{ ti.xcom_pull('spark_job_async') }}",
-    )
-
-    if create_cluster:
-        (
-            pre_delete_cluster
-            >> create_cluster
-            >> spark_job_async
-            >> spark_job_async_sensor
-            >> post_delete_cluster
         )
-    else:
-        spark_job_async >> spark_job_async_sensor
+
+        # Example of dynamic xcom keys
+        spark_job_async_sensor = DataprocJobSensor(
+            task_id=f"spark_task_async_sensor_task_{i}",
+            project_id=project_id,
+            region=region,
+            dataproc_job_id=f"{{{{ ti.xcom_pull('spark_job_async_{i}') }}}}",
+        )
+        if create_cluster:
+            (
+                pre_delete_cluster
+                >> create_cluster
+                >> spark_job_async
+                >> spark_job_async_sensor
+                >> post_delete_cluster
+            )
+        else:
+            push_task >> spark_job_async >> spark_job_async_sensor
