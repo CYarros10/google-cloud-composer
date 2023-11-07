@@ -33,13 +33,17 @@ A collection of Google Cloud Composer assets
 #### Misc. DAGs
 
 *   [Bash DAG](airflow-dags/samples/bash_dag.py) - Sample DAG with a bash operator.
+*   [Basic Xcom DAG](airflow-dags/samples/basic_xcom_dag.py) - Sample DAG with basic xcom functionality.
 *   [BigQuery DAG](airflow-dags/samples/bigquery_dag.py) - Sample DAG with BigQuery operations.
 *   [BigQuery Impersonation DAG](airflow-dags/samples/bigquery_dag.py) - Sample DAG with Service Account Impersonation.
 *   [Cloud Storage DAG](airflow-dags/samples/cloudstorage_dag.py) - Sample DAG with Cloud Storage operations.
+*   [Data Transfers DAG](airflow-dags/samples/data_transfers_dag.py) - Sample DAG with a variety of data transfer operators for Google Cloud.
 *   [Dataflow DAG](airflow-dags/samples/dataflow_dag.py) - Sample DAG with Dataflow operations.
 *   [Dataproc DAG](airflow-dags/samples/dataproc_dag.py) - Sample DAG with Dataproc operations.
+*   [Dataproc Dynamic Xcom DAG](airflow-dags/samples/dataproc_dag.py) - Sample DAG with Dataproc operations and dynamic xcom functionality.
 *   [Dataproc Serverless DAG](airflow-dags/samples/dataproc_serverless_dag.py) - Sample DAG with Dataproc Serverless operations.
 *   [Dataproc Workflow Template DAG](airflow-dags/samples/dataproc_workflow_template_dag.py) - Sample DAG with Dataproc Workflow Template operations.
+*   [Params DAG](airflow-dags/samples/params_dag.py) - Sample DAG with basic parameter usage.
 *   [Python DAG](airflow-dags/samples/python_dag.py) - Sample DAG with python operator.
 *   [Resource Manager DAG](airflow-dags/samples/resource_manager_dag.py) - Sample DAG with Resource Manager operations.
 
@@ -57,6 +61,10 @@ A collection of Google Cloud Composer assets
 #### Spark to Bigtable
 
 *   [Spark to Bigtable DAG](airflow-dags/spark-to-bigtable/spark_to_bigtable_dag.py) - Sample of a DAG that reads/writes to Bigtable using Spark and PySpark.
+
+### Airflow REST API
+
+*   [Samples](airflow-rest-api/samples.py) - A sample python script interacting with the Airflow REST API for basic operations.
 
 ### Composer Samples
 

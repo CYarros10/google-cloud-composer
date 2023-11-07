@@ -35,7 +35,7 @@ default_args = {
 user_defined_macros = {}
 
 with models.DAG(
-    dag_id=f"python_xcom_dag_{VERSION}",
+    dag_id=f"basic_xcom_dag_{VERSION}",
     description="Sample DAG for a python xcom task.",
     schedule="0 0 * * *",  # midnight daily
     tags=tags,
