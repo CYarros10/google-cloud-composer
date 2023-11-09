@@ -29,8 +29,7 @@ resource "google_project_service" "composer_api" {
 module "composer-2" {
   source                            = "./modules/composer2"
   composer_environment_name         = "composer-2-small"
-  #composer_image                    = "composer-2.1.12-airflow-2.3.4"
-  composer_image                    = "composer-2.3.5-airflow-2.4.3"
+  composer_image                    = var.composer_image
   project_id                        = var.project_id
   project_number                    = var.project_number
   region                            = var.region
@@ -58,3 +57,8 @@ module "composer-2" {
 #  project_id                       = var.project_id
 #  github_secret                    = var.github_secret
 #}
+
+module "composer-roles" {
+  source                            = "./modules/composer-iam-roles"
+  project_id                        = var.project_id
+}

@@ -18,6 +18,10 @@ variable "composer_network" {
     default = ""
 }
 
+variable "composer_image" {
+    default = ""
+}
+
 variable "composer_service_account" {
     default = ""
 }

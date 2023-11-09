@@ -56,8 +56,8 @@ default_args = {
 # Begin DAG Generation
 # -------------------------
 with models.DAG(
-    f"data_transfers_dag_{VERSION}",
-    description="Sample DAG for various Cloud Storage tasks.",
+    f"gcp_transfers_dag_{VERSION}",
+    description="Sample DAG for various transfer tasks.",
     schedule="0 0 * * *",  # midnight daily
     tags=tags,
     default_args=default_args,
