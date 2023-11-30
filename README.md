@@ -43,6 +43,7 @@ A collection of Google Cloud Composer assets
 *   [Dataproc Dynamic Xcom DAG](airflow-dags/samples/dataproc_dag.py) - Sample DAG with Dataproc operations and dynamic xcom functionality.
 *   [Dataproc Serverless DAG](airflow-dags/samples/dataproc_serverless_dag.py) - Sample DAG with Dataproc Serverless operations.
 *   [Dataproc Workflow Template DAG](airflow-dags/samples/dataproc_workflow_template_dag.py) - Sample DAG with Dataproc Workflow Template operations.
+*   [Flink DAG](airflow-dags/samples/flink_dag.py) - Various ways to deploy a Flink job on dataproc using Airflow.
 *   [Params DAG](airflow-dags/samples/params_dag.py) - Sample DAG with basic parameter usage.
 *   [Python DAG](airflow-dags/samples/python_dag.py) - Sample DAG with python operator.
 *   [Resource Manager DAG](airflow-dags/samples/resource_manager_dag.py) - Sample DAG with Resource Manager operations.

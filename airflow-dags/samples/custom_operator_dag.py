@@ -9,29 +9,9 @@ from airflow import models
 from typing import Sequence, Any
 from airflow.utils.task_group import TaskGroup
 
-from airflow.contrib.operators.bigquery_operator import (
-    BigQueryCreateEmptyTableOperator,
-    BigQueryCreateEmptyDatasetOperator,
-)
-
-from airflow.contrib.operators.bigquery_check_operator import (
-    BigQueryCheckOperator,
-    BigQueryValueCheckOperator,
-)
-
-from airflow.providers.google.cloud.sensors.bigquery import (
-    BigQueryTableExistenceSensor,
-    BigQueryTablePartitionExistenceSensor,
-)
-
 from airflow.providers.google.cloud.operators.bigquery import (
-    BigQueryDeleteTableOperator,
-    BigQueryGetDatasetOperator,
-    BigQueryGetDatasetTablesOperator,
     BigQueryTableCheckOperator,
-    BigQueryColumnCheckOperator,
-    BigQueryInsertJobOperator,
-    BigQueryDeleteDatasetOperator,
+    BigQueryColumnCheckOperator
 )
 
 # ---------------------
