@@ -50,8 +50,17 @@ class TestDagQuality(unittest.TestCase):
       logger.info("DAGs dir : {}".format(DAGS_DIR))
       self.dagbag = DagBag(dag_folder = DAGS_DIR, include_examples = False)
 
+  def test_task_count(self):
+    """Check task count for a dag"""
+    dag_id='check_for_new_files'
+    tasks = self.dagbag.get_dag(dag_id).tasks > 0
+    error_msg = "DAG missing tasks"
+    assert tasks, error_msg
+
   def test_no_import_errors(self):
-    assert len(self.dagbag.import_errors) == 0, "No Import Failures"
+    import_error = len(self.dagbag.import_errors) == 0
+    error_msg = "DAG Import Errors"
+    assert import_error, error_msg
 
   def test_valid_schedule_interval(self):
     import re

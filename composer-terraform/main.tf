@@ -10,16 +10,16 @@ resource "google_project_service" "composer_api" {
   disable_on_destroy = false
 }
 
-#module "composer-1" {
-#  source                            = "./modules/composer1"
-#  composer_environment_name         = "composer-1-small"
-#  composer_image                    = "composer-1.20.11-airflow-1.10.15"
-#  project_id                        = var.project_id
-#  region                            = var.region
-#  composer_network                  = var.composer_network
-#  composer_service_account          = var.composer_service_account
-#  worker_max_count                  = var.worker_max_count
-#}
+module "composer-1" {
+  source                            = "./modules/composer1"
+  composer_environment_name         = "small-composer-unsupported"
+  composer_image                    = "composer-1.20.11-airflow-1.10.15"
+  project_id                        = var.project_id
+  region                            = var.region
+  composer_network                  = var.composer_network
+  composer_service_account          = var.composer_service_account
+  worker_max_count                  = var.worker_max_count
+}
 
 #module "composer-alerting" {
 #  source                            = "./modules/composer-alerting"  
@@ -28,7 +28,7 @@ resource "google_project_service" "composer_api" {
 
 module "composer-2" {
   source                            = "./modules/composer2"
-  composer_environment_name         = "composer-2-small"
+  composer_environment_name         = "small-composer-latest"
   composer_image                    = var.composer_image
   project_id                        = var.project_id
   project_number                    = var.project_number
@@ -58,7 +58,7 @@ module "composer-2" {
 #  github_secret                    = var.github_secret
 #}
 
-module "composer-roles" {
-  source                            = "./modules/composer-iam-roles"
-  project_id                        = var.project_id
-}
+#module "composer-roles" {
+#  source                            = "./modules/composer-iam-roles"
+#  project_id                        = var.project_id
+#}
