@@ -6,19 +6,6 @@ NEW_COMPOSER_LOCATION="us-central1"
 SNAPSHOT_GCS_FOLDER="gs://cy-sandbox/composer-snapshots/"
 
 
-echo "... Pausing DAGs in old Composer environment ..."
-
-python3 pause_unpause_dags.py --environment ${OLD_COMPOSER_ENV} \
-  --project ${PROJECT_ID} \
-  --location ${OLD_COMPOSER_LOCATION} \
-  --operation pause
-
-echo "... Retrieving old Composer environment GCS bucket ..."
-
-gcloud composer environments describe ${OLD_COMPOSER_ENV} \
-    --location ${OLD_COMPOSER_LOCATION} \
-     --format="value(config.dagGcsPrefix)"
-
 echo "... Saving snapshot of old Composer environment ..."
 
 SAVED_SNAPSHOT=$(gcloud beta composer environments snapshots save \
