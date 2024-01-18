@@ -13,10 +13,12 @@ A collection of Google Cloud Composer assets
 *   [Reduce Airflow DAG Parse Times in Cloud Composer](https://cloud.google.com/blog/products/data-analytics/reduce-airflow-dag-parse-times-in-cloud-composer)
 *   [Cloud Composer Tenancy Strategies](https://cloud.google.com/blog/products/data-analytics/a-cloud-composer-tenancy-case-study)
 
-
 ### Airflow Guides
 
 *   [Airflow Schedule Interval 101](https://towardsdatascience.com/airflow-schedule-interval-101-bbdda31cc463)
+*   [Airflow Trigger Rules Guide](https://www.restack.io/docs/airflow-knowledge-trigger-rules-example)
+
+
 
 ---
 
