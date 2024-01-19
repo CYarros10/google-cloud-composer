@@ -150,3 +150,34 @@ with models.DAG(
     )
 
     local_to_gcs >> gcs_to_gcs >> gcs_to_bq >> bq_to_bq >> bq_to_gcs
+
+    # airflow.providers.google.cloud.transfers.adls_to_gcs
+    # airflow.providers.google.cloud.transfers.azure_blob_to_gcs
+    # airflow.providers.google.cloud.transfers.azure_fileshare_to_gcs
+    # airflow.providers.google.cloud.transfers.bigquery_to_bigquery
+    # airflow.providers.google.cloud.transfers.bigquery_to_gcs
+    # airflow.providers.google.cloud.transfers.bigquery_to_mssql
+    # airflow.providers.google.cloud.transfers.bigquery_to_mysql
+    # airflow.providers.google.cloud.transfers.bigquery_to_postgres
+    # airflow.providers.google.cloud.transfers.bigquery_to_sql
+    # airflow.providers.google.cloud.transfers.calendar_to_gcs
+    # airflow.providers.google.cloud.transfers.cassandra_to_gcs
+    # airflow.providers.google.cloud.transfers.facebook_ads_to_gcs
+    # airflow.providers.google.cloud.transfers.gcs_to_bigquery
+    # airflow.providers.google.cloud.transfers.gcs_to_gcs
+    # airflow.providers.google.cloud.transfers.gcs_to_local
+    # airflow.providers.google.cloud.transfers.gcs_to_sftp
+    # airflow.providers.google.cloud.transfers.gdrive_to_gcs
+    # airflow.providers.google.cloud.transfers.gdrive_to_local
+    # airflow.providers.google.cloud.transfers.local_to_gcs
+    # airflow.providers.google.cloud.transfers.mssql_to_gcs
+    # airflow.providers.google.cloud.transfers.mysql_to_gcs
+    # airflow.providers.google.cloud.transfers.oracle_to_gcs
+    # airflow.providers.google.cloud.transfers.postgres_to_gcs
+    # airflow.providers.google.cloud.transfers.presto_to_gcs
+    # airflow.providers.google.cloud.transfers.s3_to_gcs
+    # airflow.providers.google.cloud.transfers.salesforce_to_gcs
+    # airflow.providers.google.cloud.transfers.sftp_to_gcs
+    # airflow.providers.google.cloud.transfers.sheets_to_gcs
+    # airflow.providers.google.cloud.transfers.sql_to_gcs
+    # airflow.providers.google.cloud.transfers.trino_to_gcs
