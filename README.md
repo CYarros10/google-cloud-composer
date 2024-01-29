@@ -62,6 +62,8 @@ A collection of Google Cloud Composer assets
 *   [Basic Xcom DAG](airflow-2-dags/samples/basic_xcom_dag.py) - Sample DAG with basic xcom functionality.
 *   [BigQuery DAG](airflow-2-dags/samples/bigquery_dag.py) - Sample DAG with BigQuery operations.
 *   [BigQuery Impersonation DAG](airflow-2-dags/samples/bigquery_dag.py) - Sample DAG with Service Account Impersonation.
+*   [Branching DAG](airflow-2-dags/samples/branch_operator_dag.py) - Sample DAG with basic branching functionality.
+*   [Cloud SQL DAG](airflow-2-dags/samples/cloud_sql_dag.py) - Sample DAG with Cloud SQL operations.
 *   [Cloud Storage DAG](airflow-2-dags/samples/cloudstorage_dag.py) - Sample DAG with Cloud Storage operations.
 *   [Data Transfers DAG](airflow-2-dags/samples/data_transfers_dag.py) - Sample DAG with a variety of data transfer operators for Google Cloud.
 *   [Dataflow DAG](airflow-2-dags/samples/dataflow_dag.py) - Sample DAG with Dataflow operations.
