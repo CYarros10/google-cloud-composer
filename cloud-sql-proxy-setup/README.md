@@ -2,7 +2,7 @@
 
 ## About
 
-When you absolutely need to use Airflow to connect to Cloud SQL and return row results.
+When you absolutely **need** to use Airflow to connect to Cloud SQL and return row results via XCOM or logs.
 
 Otherwise: use [the native Google Cloud Operators](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/cloud/cloud_sql.html) such as:
 
