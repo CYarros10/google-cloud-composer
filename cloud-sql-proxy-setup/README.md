@@ -26,9 +26,9 @@ Otherwise: use [the native Google Cloud Operators](https://airflow.apache.org/do
 - **Connection ID:** cloud_sql_proxy_service
 - **Connection Type:** MySQL
 - **Host:** sql-proxy-deployment-service.default.svc.cluster.local
-- **Schema:** <your mysql database>
-- **Login:** <your mysql user>
-- **Password:** <your mysql password>
+- **Schema:** [your mysql database]
+- **Login:** [your mysql user]
+- **Password:** [your mysql password]
 - **Port:** 3306
 
 **5) Deploy the sample [cloud_sql_proxy_dag.py](dags/cloud_sql_proxy_dag.py)** (it will probably fail if you haven't created the MySQL table yet)
