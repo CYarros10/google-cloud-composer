@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: sql-proxy-deployment-service
+  name: sql-proxy-deployment-service
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    app: [YOUR COMPOSER GKE CLUSTER NAME]
+  type: ClusterIP

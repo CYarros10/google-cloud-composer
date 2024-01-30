@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-proxy-deployment
+spec:
+  selector:
+    matchLabels:
+      app: [YOUR COMPOSER GKE CLUSTER NAME]
+  template:
+    metadata:
+      labels:
+        app: [YOUR COMPOSER GKE CLUSTER NAME]
+    spec:
+      containers:
+      - args:
+        - --structured-logs
+        - --address=0.0.0.0
+        - --port=3306
+        - [YOUR CLOUDSQL CONNECTION NAME]
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: airflow-connect-secret
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: airflow-connect-secret
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              key: database
+              name: airflow-connect-secret
+        image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.1.0
+        name: cloud-sql-proxy
+        resources:
+          requests:
+            cpu: '1'
+            memory: 2Gi
+        securityContext:
+          runAsNonRoot: true
+      serviceAccountName: cloud-sql-ksa
