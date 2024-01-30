@@ -21,6 +21,19 @@ Otherwise: use [the native Google Cloud Operators](https://airflow.apache.org/do
 
 **3) run `setup.sh`**
 
+What does it do?
+
+1. CREATE GOOGLE SERVICE ACCOUNT
+2. CREATE IAM POLICY BINDING
+3. AUTHENTICATE WITH COMPOSER GKE CLUSTER
+4. CREATE KUBERNETES SERVICE ACCOUNT
+5. CREATE KUBERNETES SECRET 
+6. ENABLE WORKLOAD IDENTITY IN GKE CLUSTER
+7. CREATE GSA-KSA BINDING
+8. CREATE GKE ANNOTATION FOR KSA
+9. APPLY SIDECAR DEPLOYMENT 
+10. APPLY SIDECAR SERVICE
+
 **4) Create an Airflow Connection to your Cloud SQL Proxy Service**
 
 - **Connection ID:** cloud_sql_proxy_service
