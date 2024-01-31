@@ -48,20 +48,16 @@ done
 
 echo "... Saving snapshot of old Composer environment ..."
 
-start=`date +%s.%N`
-echo "start: ${start}"
-
 SAVED_SNAPSHOT=$(gcloud beta composer environments snapshots save \
   ${OLD_COMPOSER_ENV} \
   --location ${OLD_COMPOSER_LOCATION} \
   --snapshot-location ${SNAPSHOT_GCS_FOLDER})
 
-echo "... Pausing all DAGs in old Composer environment (this may take a while)..."
+echo "... Pausing all DAGs in old Composer environment ..."
 
-python3 pause_unpause_dags.py --operation pause \
-  --project $PROJECT_ID \
-  --environment $OLD_COMPOSER_ENV \
-  --location $OLD_COMPOSER_LOCATION
+gcloud composer environments run ${OLD_COMPOSER_ENV} \
+  --location ${OLD_COMPOSER_LOCATION} \
+  dags trigger -- "pause_all_dags_dag_v1"
 
 SAVED_SNAPSHOT_PATH=$(echo ${SAVED_SNAPSHOT} | awk '{split($0, a, ": "); print a[3]}')
 
@@ -72,8 +68,4 @@ gcloud beta composer environments snapshots load \
   --location ${NEW_COMPOSER_LOCATION} \
   --snapshot-path ${SAVED_SNAPSHOT_PATH}
 
-end=`date +%s.%N`
-echo "end: ${end}"
-
-runtime=$( echo "$end - $start" | bc -l )
-echo "SLA: ${runtime} seconds"
+echo "COMPLETE!"
