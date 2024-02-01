@@ -1,0 +1,15 @@
+dag_id                       | filepath                       | owner    | paused
+=============================+================================+==========+=======
+advanced_sla_reporting_dag   | advanced_sla_reporting_dag.py  | auditing | True
+airflow_monitoring           | airflow_monitoring.py          | airflow  | False
+cloudsql_dag_v0_0_10         | sql_dag_testing.py             | Google   | True
+cloudsql_dag_v0_0_8          | cloud_sql_dag.py               | Google   | True
+custom_operator_dag_v0_0_3   | abstract_cluster_create_dag.py | Google   | True
+data_transfers_dag_v0_0_1    | data_transfers_dag.py          | Google   | False
+dataproc_dynamic_xcom_v0_0_5 | dataproc_dynamic_xcom_dag.py   | Google   | True
+flink_dataproc_dag_v0_0_4    | flink_dag.py                   | Google   | False
+gcp_sensors_dag_v0_0_1       | gcp_sensors_dag.py             | Google   | False
+local_config_dag_v0_2        | local_configured_dag.py        | Google   | False
+parameterized_dag_v0_0_0     | params_dag.py                  | Google   | False
+python_xcom_dag_v0_0_0       | python_xcom_dag.py             | Google   | False
+spark_to_bigtable_v0_0       | spark_to_bigtable_dag.py       | Google   | False
