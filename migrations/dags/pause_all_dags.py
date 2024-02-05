@@ -19,10 +19,10 @@ default_args = {
 }
 
 with models.DAG(
-    f"pause_all_dags_dag_v1",
+    "pause_all_dags",
     tags=["airflow_db"],
     description="Pause all dags.",
-    is_paused_upon_creation=True,
+    is_paused_upon_creation=False,
     catchup=False,
     start_date=datetime(2024, 1, 1),
     dagrun_timeout=timedelta(minutes=30),

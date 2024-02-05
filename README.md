@@ -99,3 +99,14 @@ A collection of Google Cloud Composer assets
 *   [Composer Local Development](https://cloud.google.com/composer/docs/composer-2/run-local-airflow-environments) - create, configure, and run a local Airflow environment using Composer Local Development CLI tool.
 *   [Ruff](https://github.com/astral-sh/ruff) - An extremely fast Python linter, written in Rust. Great for linting Airflow DAGs.
 *   [Black](https://pypi.org/project/black/) - Black is the uncompromising Python code formatter. 
+
+---
+
+## More Examples
+
+*   [Airflow DAGs](https://github.com/apache/airflow/tree/main/airflow/example_dags) - General purpose, standard Airflow DAGs.
+*   [Google Cloud Airflow DAGs](https://github.com/apache/airflow/tree/main/airflow/providers/google/cloud/example_dags) - Various Google Cloud DAGs.
+*   [Many More Google Cloud Airflow DAGs](https://github.com/apache/airflow/tree/main/tests/system/providers/google/cloud) - Various Google Cloud DAGs.
+
+
+

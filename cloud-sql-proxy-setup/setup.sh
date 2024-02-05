@@ -1,12 +1,12 @@
 GOOGLE_SA=""
-K8_SA=""
 GKE_CLUSTER=""
 REGION=""
 PROJECT_ID=""
-K8_SECRET=""
 CLOUDSQL_DB=""
 CLOUDSQL_USER=""
 CLOUDSQL_PASS=""
+K8_SA="cloud-sql-ksa"
+K8_SECRET="airflow-connect-secret"
 
 # CREATE GOOGLE SERVICE ACCOUNT
 gcloud iam service-accounts create ${GOOGLE_SA} --display-name ${GOOGLE_SA}
