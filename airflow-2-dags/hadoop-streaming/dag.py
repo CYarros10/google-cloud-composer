@@ -56,6 +56,9 @@ with models.DAG(
     cluster_name=""
     bucket=""
 
+    # equivalent gcloud command
+    # gcloud dataproc jobs submit hadoop --cluster cluster-4db0 --region us-central1 --jar file:///usr/lib/hadoop/hadoop-streaming.jar --files gs://cy-sandbox/hadoop_streaming_sample/mapper.py,gs://cy-sandbox/hadoop_streaming_sample/reducer.py -- -mapper mapper.py -reducer reducer.py -input gs://cy-sandbox/hadoop_streaming_sample/data.txt  -output gs://cy-sandbox/hadoop_streaming_sample/output
+
     hadoop_streaming_py_job = DataprocSubmitJobOperator(
         task_id="hadoop_streaming_py_job",
         project_id=project_id,
