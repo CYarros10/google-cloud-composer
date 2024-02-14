@@ -19,6 +19,7 @@ A collection of Google Cloud Composer assets
 *   [Airflow DAG Authoring 101](https://academy.astronomer.io/astronomer-certification-apache-airflow-dag-authoring-preparation)
 *   [Airflow Schedule Interval 101](https://towardsdatascience.com/airflow-schedule-interval-101-bbdda31cc463)
 *   [Airflow Trigger Rules Guide](https://www.restack.io/docs/airflow-knowledge-trigger-rules-example)
+*   [Airflow Best Practices](https://medium.com/@anupamk36/airflow-best-practices-d982fabd61f6)
 
 
 
