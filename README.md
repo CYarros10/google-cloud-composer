@@ -21,6 +21,7 @@ A collection of Google Cloud Composer assets
 *   [Airflow Trigger Rules Guide](https://www.restack.io/docs/airflow-knowledge-trigger-rules-example)
 *   [Airflow Best Practices](https://medium.com/@anupamk36/airflow-best-practices-d982fabd61f6)
 *   [Zombie and Undead Tasks](https://medium.com/@brihati1373/zombie-and-undead-tasks-in-airflow-e09ddbe6b22f)
+*   [Airflow Resource Utilization](https://towardsdatascience.com/3-steps-to-build-airflow-pipelines-with-efficient-resource-utilisation-b9f399d29fb3)
 
 
 
