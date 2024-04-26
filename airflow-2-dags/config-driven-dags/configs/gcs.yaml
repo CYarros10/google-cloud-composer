@@ -5,5 +5,5 @@ SLA_MINS: 10
 RETRIES: 5
 TAGS:
 - type:demo
-- customer:yahoo
+- customer:sample
 - config:gcs
