@@ -12,6 +12,7 @@ A collection of Google Cloud Composer assets
 *   [Optimize Cloud Composer via Better Airflow DAGs](https://cloud.google.com/blog/products/data-analytics/optimize-cloud-composer-via-better-airflow-dags)
 *   [Reduce Airflow DAG Parse Times in Cloud Composer](https://cloud.google.com/blog/products/data-analytics/reduce-airflow-dag-parse-times-in-cloud-composer)
 *   [Cloud Composer Tenancy Strategies](https://cloud.google.com/blog/products/data-analytics/a-cloud-composer-tenancy-case-study)
+*   [Optimize Cloud Composer + Airflow Settings](https://cloud.google.com/blog/products/data-analytics/scale-your-composer-environment-together-your-business)
 
 ### Airflow Guides
 
@@ -19,6 +20,9 @@ A collection of Google Cloud Composer assets
 *   [Airflow DAG Authoring 101](https://academy.astronomer.io/astronomer-certification-apache-airflow-dag-authoring-preparation)
 *   [Airflow Schedule Interval 101](https://towardsdatascience.com/airflow-schedule-interval-101-bbdda31cc463)
 *   [Airflow Trigger Rules Guide](https://www.restack.io/docs/airflow-knowledge-trigger-rules-example)
+*   [Airflow Best Practices](https://medium.com/@anupamk36/airflow-best-practices-d982fabd61f6)
+*   [Zombie and Undead Tasks](https://medium.com/@brihati1373/zombie-and-undead-tasks-in-airflow-e09ddbe6b22f)
+*   [Airflow Resource Utilization](https://towardsdatascience.com/3-steps-to-build-airflow-pipelines-with-efficient-resource-utilisation-b9f399d29fb3)
 
 
 
