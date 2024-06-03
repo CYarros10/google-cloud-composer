@@ -13,6 +13,7 @@ Rotate Airflow to a new composer environment and decommission the old environmen
 Prefer in-place update of composer env as far as possible. This is supported for composer env minor version update, using the google beta-provider. Apart from major version updates, there could be more scenarios where in-place update is not possible and env rotation is unavoidable. Examples:
 - Changing any network configuration like tags, vpc network, ip ranges, etc.
 - Encryption key
+- Unhealthy environment status that doesn't go away
 
 Updating following are safe as these doesn’t result in env replacement:
 - Labels

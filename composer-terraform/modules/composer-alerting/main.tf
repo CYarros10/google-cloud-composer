@@ -3,7 +3,7 @@ resource "google_monitoring_notification_channel" "basic" {
   type         = "email"
   project      = var.project_id
   labels = {
-    email_address = var.notifical_email
+    email_address = var.notification_email
   }
   force_delete = false
 }

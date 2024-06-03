@@ -69,7 +69,7 @@ variable "worker_mem" {
 variable "worker_cpu" {
     default = ""
 }
-variable "notifical_email" {
+variable "notification_email" {
     default = ""
 }
 variable "github_secret" {

@@ -15,7 +15,7 @@ from airflow.providers.google.cloud.operators.dataproc import (
 # ---------------------
 # Universal DAG info
 # ---------------------
-VERSION = "v0_0_3"
+VERSION = "v0_0_4"
 
 # -------------------------
 # Tags, Default Args, and Macros
@@ -65,7 +65,15 @@ with models.DAG(
         group_id="dataproc_cluster_setup",
         project_id=PROJECT_ID,
         region=REGION,
-        cluster_name=CLUSTER_NAME
+        cluster_name=CLUSTER_NAME,
+        idle_delete="86400s" # 1 day
+    )
+
+    forever_dataproc_cluster_setup =  helper_functions.setup_cluster_taskgroup(
+        group_id="forever_dataproc_cluster_setup",
+        project_id=PROJECT_ID,
+        region=REGION,
+        cluster_name="forever-dataproc",
     )
 
     dataproc_cluster_deletion = DataprocDeleteClusterOperator(

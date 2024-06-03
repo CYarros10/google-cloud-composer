@@ -2,6 +2,6 @@ variable "project_id" {
     default = ""
 }
 
-variable "notifical_email" {
+variable "notification_email" {
     default = ""
 }

@@ -127,6 +127,12 @@ gcloud composer environments run ${OLD_COMPOSER_ENV} \
   --location ${OLD_COMPOSER_LOCATION} \
   dags trigger -- "pause_all_dags"
 
+echo "-------------------------------"
+echo "... Removing pause_all DAG ..."
+echo "-------------------------------"
+
+gsutil rm $OLD_DAG_FOLDER/pause_all_dags.py
+
 echo "------------------------------------------------------"
 echo "... Loading snapshot into new Composer environment ..."
 echo "------------------------------------------------------"

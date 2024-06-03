@@ -13,8 +13,9 @@ class CustomDataprocCreateClusterOperator(DataprocCreateClusterOperator):
     standardizes what can be set for cluster creation
     forces a specific cluster config
     """
-    def __init__(self, project_id: str, region: str, cluster_name: str, **kwargs):
+    def __init__(self, project_id: str, region: str, cluster_name: str, idle_delete:str, **kwargs):
         super().__init__(project_id=project_id, region=region, cluster_name=cluster_name, **kwargs)
+
         self.cluster_config = {
             "master_config": {
                 "num_instances": 1,
@@ -32,9 +33,12 @@ class CustomDataprocCreateClusterOperator(DataprocCreateClusterOperator):
                     "boot_disk_size_gb": 1024,
                 },
             },
-    }
+            "lifecycle_config": {
+                "idle_delete_ttl": idle_delete
+            }
+        }
 
-def setup_cluster_taskgroup(group_id, project_id, cluster_name, region):
+def setup_cluster_taskgroup(group_id, project_id, cluster_name, region, idle_delete="600s"):
     """
     Delete (if exists) and create a dataproc cluster.
     """
@@ -52,6 +56,7 @@ def setup_cluster_taskgroup(group_id, project_id, cluster_name, region):
             project_id=project_id,
             cluster_name=cluster_name,
             region=region,
+            idle_delete=idle_delete,
             trigger_rule="all_done",
         )
         pre_delete_cluster >> create_cluster

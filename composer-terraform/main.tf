@@ -10,21 +10,22 @@ resource "google_project_service" "composer_api" {
   disable_on_destroy = false
 }
 
-module "composer-1" {
-  source                            = "./modules/composer1"
-  composer_environment_name         = "small-composer-unsupported"
-  composer_image                    = "composer-1.20.11-airflow-1.10.15"
-  project_id                        = var.project_id
-  region                            = var.region
-  composer_network                  = var.composer_network
-  composer_service_account          = var.composer_service_account
-  worker_max_count                  = var.worker_max_count
-}
+# module "composer-1" {
+#   source                            = "./modules/composer1"
+#   composer_environment_name         = "small-composer-unsupported"
+#   composer_image                    = "composer-1.20.11-airflow-1.10.15"
+#   project_id                        = var.project_id
+#   region                            = var.region
+#   composer_network                  = var.composer_network
+#   composer_service_account          = var.composer_service_account
+#   worker_max_count                  = var.worker_max_count
+# }
 
-#module "composer-alerting" {
-#  source                            = "./modules/composer-alerting"  
-#  project_id                           = var.project_id
-#}
+module "composer-alerting" {
+  source                            = "./modules/composer-alerting"  
+  project_id                        = var.project_id
+  notification_email                = var.notification_email
+}
 
 module "composer-2" {
   source                            = "./modules/composer2"

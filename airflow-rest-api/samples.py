@@ -40,6 +40,33 @@ def make_composer2_web_server_request(
 
     return authed_session.request(method, url, **kwargs)
 
+def get_health(web_server_url: str) -> str:
+    """
+    Make a request to return environment health using the stable Airflow 2 REST API.
+    https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html
+
+    Args:
+      web_server_url: The URL of the Airflow 2 web server.
+    """
+
+    endpoint = f"api/v1/health"
+    request_url = f"{web_server_url}/{endpoint}"
+
+    response = make_composer2_web_server_request(
+        request_url, method="GET"
+    )
+
+    if response.status_code == 403:
+        raise requests.HTTPError(
+            "You do not have a permission to perform this operation. "
+            "Check Airflow RBAC roles for your account."
+            f"{response.headers} / {response.text}"
+        )
+    elif response.status_code != 200:
+        response.raise_for_status()
+    else:
+        return response.text
+
 def list_dags(web_server_url: str) -> str:
     """
     Make a request to list dags using the stable Airflow 2 REST API.
@@ -153,12 +180,12 @@ if __name__ == "__main__":
     #  --format="value(config.airflowUri)"
     
     web_server_url = (
-        "https://cd138f5c85774c73986cf2cc2b16def1-dot-us-central1.composer.googleusercontent.com"
+        "https://e2efa067a261498da8d670489d63ac9b-dot-us-central1.composer.googleusercontent.com"
     )
 
     # TRIGGER DAGS
     # ----------------------------
-    dag_id = "basic_xcom_dag_v0_0_0"  # Replace with the ID of the DAG that you want to run.
+    dag_id = "demo_af_python_operator"  # Replace with the ID of the DAG that you want to run.
     dag_config = {
     #    "your-key": "your-value"
     } 
@@ -199,3 +226,10 @@ if __name__ == "__main__":
     for plugin in plugins:
         name = str(plugin['name'])
         print(name)
+
+    # Get Environment Health
+    # ----------------------------
+    get_health_response = get_health(
+        web_server_url=web_server_url
+    )
+    print(json.dumps(get_health_response))
