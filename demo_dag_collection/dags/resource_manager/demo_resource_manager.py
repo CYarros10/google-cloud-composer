@@ -12,7 +12,6 @@ from airflow.operators.python import PythonOperator
 # ---------------------
 # Config
 # ---------------------
-VERSION = "v0_0_0"
 PROJECT = "<your project>"
 TEAM = "google"
 ORG_ID = "<your org id number>"
@@ -20,38 +19,23 @@ FOLDER_ID = "<your folder id number"
 VALID_FOLDER_REGEX = "<your regex match>"
 VALID_PROJECT_REGEX = "<your regex match>"
 
-# -------------------------
-# Tags, Default Args, and Macros
-# -------------------------
-
-tags = ["application:samples"]
-
-default_args = {
-    "owner": "Google",
-    "depends_on_past": False,
-    "email": [""],
-    "email_on_failure": False,
-    "email_on_retry": False,
-    "retries": 1,
-    "retry_delay": timedelta(minutes=2),
-    "start_date": datetime(2023, 9, 28),
-    "sla": timedelta(minutes=25),
-    # "gcp_conn_id": GCP_CONN_ID
-}
-
-# -------------------------
-# Begin DAG Generation
-# -------------------------
 with models.DAG(
-    f"resource_manager_dag_{VERSION}",
-    description="resource manager samples",
-    schedule="0 0 * * *",  # daily midnight
-    tags=tags,
-    default_args=default_args,
-    is_paused_upon_creation=True,
+    "demo_resource_manager",
+    schedule="@once",
+    start_date=datetime(2024, 1, 1),
     catchup=False,
-    max_active_runs=2,
-    dagrun_timeout=timedelta(minutes=30),
+    is_paused_upon_creation=True,
+    dagrun_timeout=timedelta(minutes=60),
+    max_active_runs=1,
+    default_args={
+        "owner": "Google",
+        "depends_on_past": False,
+        "retries": 1,
+        "retry_delay": timedelta(minutes=1),
+        "sla": timedelta(minutes=55),
+    },
+    description="This Airflow DAG validates project ids and folders within resource manager",
+    tags=["demo", "google_cloud", "resource_manager", "python"],
 ) as dag:
     from google.cloud import resourcemanager_v3
     import re

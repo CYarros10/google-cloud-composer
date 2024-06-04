@@ -18,67 +18,53 @@ from airflow.providers.google.cloud.operators.dataproc import (
 )
 from airflow.providers.google.cloud.sensors.dataproc import DataprocJobSensor
 
-# ---------------------
-# Universal DAG info
-# ---------------------
-VERSION = "v0_0_0"
-
-# -------------------------
-# Tags, Default Args, and Macros
-# -------------------------
-tags = ["application:samples"]
-
-default_args = {
-    "owner": "Google",
-    "depends_on_past": False,
-    "email": [""],
-    "email_on_failure": False,
-    "email_on_retry": False,
-    "retries": 1,
-    "retry_delay": timedelta(minutes=2),
-    "start_date": datetime(2023, 8, 17),
-    "mode": "reschedule",
-    "poke_interval": 60,
-    "use_legacy_sql": False,
-    "sla": timedelta(minutes=25),
-}
 timestr = time.strftime("%Y%m%d-%H%M%S")
 
 # -------------------------
 # Begin DAG Generation
 # -------------------------
+
+PROJECT_ID = "cy-artifacts"
+LOCATION_REGION = "us-central1"
+CLUSTER_NAME = "demo-flink-cluster"
+GCS_BUCKET_NAME = "your-bucket-name"
+FLINK_JAR_GCS_PATH = ""
+
 with models.DAG(
-    f"flink_dataproc_dag_{VERSION}",
-    description="example flink dataproc dag",
-    schedule="0 0 * * *",  # midnight daily
-    tags=tags,
-    default_args=default_args,
+    "demo_flink_dataproc",
+    schedule="@once",  # midnight daily
+    default_args={
+        "owner": "Google",
+        "retries": 1,
+        "retry_delay": timedelta(minutes=2),
+        "start_date": datetime(2024, 1, 1),
+        "mode": "reschedule",
+        "poke_interval": 60,
+        "sla": timedelta(minutes=25),
+    },
     is_paused_upon_creation=True,
     catchup=False,
     max_active_runs=2,
     dagrun_timeout=timedelta(minutes=30),
+    description="This Airflow DAG runs a Flink job on a Dataproc cluster.",
+    tags=["demo", "dataproc", "flink"]
 ) as dag:
-    project_id = "cy-artifacts"
-    region = "us-central1"
-    dp_cluster_name = "flinky"
-    gcs_bucket_name = "cy-sandbox"
-    flink_jar_gcs_path = "gs://cy-sandbox/tmp"
 
     # Only create infrastructure if True
     create_cluster = False
     if create_cluster:
         pre_delete_cluster = DataprocDeleteClusterOperator(
             task_id="pre_delete_cluster",
-            project_id=project_id,
-            region=region,
-            cluster_name=dp_cluster_name,
+            project_id=PROJECT_ID,
+            region=LOCATION_REGION,
+            cluster_name=CLUSTER_NAME,
         )
 
         create_cluster = DataprocCreateClusterOperator(
             task_id="create_cluster",
-            project_id=project_id,
-            region=region,
-            cluster_name=dp_cluster_name,
+            project_id=PROJECT_ID,
+            region=LOCATION_REGION,
+            cluster_name=CLUSTER_NAME,
             cluster_config={
                 "master_config": {
                     "num_instances": 1,
@@ -101,31 +87,31 @@ with models.DAG(
         )
         post_delete_cluster = DataprocDeleteClusterOperator(
             task_id="post_delete_cluster",
-            project_id=project_id,
-            region=region,
-            cluster_name=dp_cluster_name,
+            project_id=PROJECT_ID,
+            region=LOCATION_REGION,
+            cluster_name=CLUSTER_NAME,
             trigger_rule="all_done",
         )
 
     # bash operator gcloud
     flink_job_via_gcloud_pig = BashOperator(
         task_id="flink_job_via_gcloud_pig",
-        bash_command=f"gcloud dataproc jobs submit pig --cluster=flinky --region=us-central1    -e='fs -cp -f {flink_jar_gcs_path} file:///tmp/the.jar; sh chmod 750 /tmp/the.jar; sh flink run -m yarn-cluster -p 8 -ys 2 -yjm 1024m -ytm 2048m /tmp/the.jar;'",
+        bash_command=f"gcloud dataproc jobs submit pig --cluster=flinky --region=us-central1    -e='fs -cp -f {FLINK_JAR_GCS_PATH} file:///tmp/the.jar; sh chmod 750 /tmp/the.jar; sh flink run -m yarn-cluster -p 8 -ys 2 -yjm 1024m -ytm 2048m /tmp/the.jar;'",
     )
     
     # pig to execute shell script
     flink_job_via_airflow_pig = DataprocSubmitJobOperator(
         task_id=f"flink_job_via_airflow_pig",
-        project_id=project_id,
-        region=region,
+        project_id=PROJECT_ID,
+        region=LOCATION_REGION,
         asynchronous=False,
         job={
-            "reference": {"project_id": project_id},
-            "placement": {"cluster_name": dp_cluster_name},
+            "reference": {"project_id": PROJECT_ID},
+            "placement": {"cluster_name": CLUSTER_NAME},
             "pig_job": {
                 "query_list": {
                     "queries": [
-                        f"fs -cp -f {flink_jar_gcs_path} file:///tmp/the.jar; sh chmod 750 /tmp/the.jar; sh flink run -m yarn-cluster -p 8 -ys 2 -yjm 1024m -ytm 2048m /tmp/the.jar;"
+                        f"fs -cp -f {FLINK_JAR_GCS_PATH} file:///tmp/the.jar; sh chmod 750 /tmp/the.jar; sh flink run -m yarn-cluster -p 8 -ys 2 -yjm 1024m -ytm 2048m /tmp/the.jar;"
                     ]
                 }
                    

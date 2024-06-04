@@ -17,52 +17,36 @@ from airflow.providers.google.cloud.operators.dataproc import (
 from airflow.providers.google.cloud.sensors.dataproc import DataprocJobSensor
 from airflow.operators.python import PythonOperator
 
-# ---------------------
-# Universal DAG info
-# ---------------------
-VERSION = "v0_0_5"
 
-# -------------------------
-# Tags, Default Args, and Macros
-# -------------------------
-tags = ["application:samples"]
+PROJECT_ID = "your-project"
+LOCATION_REGION = "us-central1"
+CLUSTER_NAME = "your-cluster"
+GCS_BUCKET_NAME = "your-bucket"
+BIGTABLE_INSTANCE = "your-bigtable-instance"
+BIGTABLE_TABLE = "your-bigtable-table"
 
-default_args = {
-    "owner": "Google",
-    "depends_on_past": False,
-    "email": [""],
-    "email_on_failure": False,
-    "email_on_retry": False,
-    "retries": 1,
-    "retry_delay": timedelta(minutes=2),
-    "start_date": datetime(2023, 8, 17),
-    "mode": "reschedule",
-    "poke_interval": 60,
-    "use_legacy_sql": False,
-    "sla": timedelta(minutes=25),
-}
-timestr = time.strftime("%Y%m%d-%H%M%S")
 
 # -------------------------
 # Begin DAG Generation
 # -------------------------
 with models.DAG(
-    f"dataproc_dynamic_xcom_{VERSION}",
-    description="example dataproc dag",
-    schedule="0 0 * * *",  # midnight daily
-    tags=tags,
-    default_args=default_args,
-    is_paused_upon_creation=True,
+    "demo_dataproc_dynamic_xcom",
+    schedule="@once",
+    start_date=datetime(2024, 1, 1),
     catchup=False,
-    max_active_runs=2,
-    dagrun_timeout=timedelta(minutes=30),
+    is_paused_upon_creation=True,
+    dagrun_timeout=timedelta(minutes=60),
+    max_active_runs=1,
+    default_args={
+        "owner": "Google",
+        "depends_on_past": False,
+        "retries": 1,
+        "retry_delay": timedelta(minutes=1),
+        "sla": timedelta(minutes=55),
+    },
+    description=" This Airflow DAG demonstrates dynamic xcom values via a spark job and sensor.",
+    tags=["demo", "google_cloud", "dataproc", "spark", "xcom"],
 ) as dag:
-    project_id = "your-project"
-    region = "us-central1"
-    dp_cluster_name = "your-cluster"
-    gcs_bucket_name = "your-bucket"
-    bigtable_instance = "your-bigtable-instance"
-    bigtable_table = "your-bigtable-table"
 
     def push_value_to_xcom(**kwargs):
         task_instance = kwargs["ti"]
@@ -74,16 +58,16 @@ with models.DAG(
     if create_cluster:
         pre_delete_cluster = DataprocDeleteClusterOperator(
             task_id="pre_delete_cluster",
-            project_id=project_id,
-            region=region,
-            cluster_name=dp_cluster_name,
+            project_id=PROJECT_ID,
+            region=LOCATION_REGION,
+            cluster_name=CLUSTER_NAME,
         )
 
         create_cluster = DataprocCreateClusterOperator(
             task_id="create_cluster",
-            project_id=project_id,
-            region=region,
-            cluster_name=dp_cluster_name,
+            project_id=PROJECT_ID,
+            region=LOCATION_REGION,
+            cluster_name=CLUSTER_NAME,
             cluster_config={
                 "master_config": {
                     "num_instances": 1,
@@ -106,9 +90,9 @@ with models.DAG(
         )
         post_delete_cluster = DataprocDeleteClusterOperator(
             task_id="post_delete_cluster",
-            project_id=project_id,
-            region=region,
-            cluster_name=dp_cluster_name,
+            project_id=PROJECT_ID,
+            region=LOCATION_REGION,
+            cluster_name=CLUSTER_NAME,
             trigger_rule="all_done",
         )
 
@@ -123,33 +107,33 @@ with models.DAG(
         # Example of appending to XCOM dynamically
         spark_job_async = DataprocSubmitJobOperator(
             task_id=f"spark_job_async_{i}",
-            project_id=project_id,
-            region=region,
+            project_id=PROJECT_ID,
+            region=LOCATION_REGION,
             asynchronous=True,
             job={
-                "reference": {"project_id": project_id},
-                "placement": {"cluster_name": dp_cluster_name},
+                "reference": {"project_id": PROJECT_ID},
+                "placement": {"cluster_name": CLUSTER_NAME},
                 "spark_job": {
                     "jar_file_uris": [
                         "file:///usr/lib/spark/external/spark-avro.jar",
-                        f"gs://{gcs_bucket_name}/jars/dataproc-templates-1.0-SNAPSHOT.jar",
+                        f"gs://{GCS_BUCKET_NAME}/jars/dataproc-templates-1.0-SNAPSHOT.jar",
                     ],
                     "main_class": "com.google.cloud.dataproc.templates.main.DataProcTemplate",  # noqa
                     "args": [
                         "--template",
                         "GCSTOBIGTABLE",
                         "--templateProperty",
-                        f"project.id={project_id}",
+                        f"project.id={PROJECT_ID}",
                         "--templateProperty",
-                        f"gcs.bigtable.input.location=gs://{gcs_bucket_name}/{{{{ti.xcom_pull(key='my_variable')}}}}_{i}.csv",
+                        f"gcs.bigtable.input.location=gs://{GCS_BUCKET_NAME}/{{{{ti.xcom_pull(key='my_variable')}}}}_{i}.csv",
                         "--templateProperty",
                         "gcs.bigtable.input.format=csv",
                         "--templateProperty",
-                        f"gcs.bigtable.output.instance.id={bigtable_instance}",
+                        f"gcs.bigtable.output.instance.id={BIGTABLE_INSTANCE}",
                         "--templateProperty",
-                        f"gcs.bigtable.output.project.id={project_id}",
+                        f"gcs.bigtable.output.project.id={PROJECT_ID}",
                         "--templateProperty",
-                        f"gcs.bigtable.table.name={bigtable_table}",
+                        f"gcs.bigtable.table.name={BIGTABLE_TABLE}",
                         "--templateProperty",
                         "gcs.bigtable.column.family=cf",
                     ],
@@ -160,8 +144,8 @@ with models.DAG(
         # Example of dynamic xcom keys
         spark_job_async_sensor = DataprocJobSensor(
             task_id=f"spark_task_async_sensor_task_{i}",
-            project_id=project_id,
-            region=region,
+            project_id=PROJECT_ID,
+            region=LOCATION_REGION,
             dataproc_job_id=f"{{{{ ti.xcom_pull('spark_job_async_{i}') }}}}",
         )
         if create_cluster:

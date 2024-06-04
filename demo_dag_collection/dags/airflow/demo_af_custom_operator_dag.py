@@ -14,39 +14,6 @@ from airflow.providers.google.cloud.operators.bigquery import (
     BigQueryColumnCheckOperator
 )
 
-# ---------------------
-# Universal DAG info
-# ---------------------
-VERSION = "v0_0_0"
-
-# -------------------------
-# Tags, Default Args, and Macros
-# -------------------------
-tags = ["application:samples"]
-
-default_args = {
-    "owner": "Google",
-    "depends_on_past": False,
-    "email": [""],
-    "email_on_failure": False,
-    "email_on_retry": False,
-    "retries": 1,
-    "retry_delay": timedelta(minutes=2),
-    "start_date": datetime(2022, 3, 15),
-    "mode": "reschedule",
-    "poke_interval": 60,
-    "use_legacy_sql": False,
-    "sla": timedelta(minutes=1),
-}
-user_defined_macros = {
-    "project_id": "cy-artifacts",
-    "region": "us-central1",
-    "bq_dataset_id": "health_check_dataset",
-    "bq_table_id": "health_check_table",
-    "bq_partition_id": "",
-}
-
-
 # -------------------------
 # Callback Functions / Custom Operators
 # -------------------------
@@ -88,16 +55,22 @@ class CustomOperatorRowCheck(BigQueryTableCheckOperator):
 # Begin DAG Generation
 # -------------------------
 with models.DAG(
-    f"custom_operator_dag_{VERSION}",
-    description="Sample DAG for custom operator creation.",
-    schedule_interval="0 0 * * *",  # midnight daily
-    tags=tags,
-    default_args=default_args,
-    user_defined_macros=user_defined_macros,
-    is_paused_upon_creation=True,
+    f"demo_custom_operator",
+    schedule_interval="@once",
+    start_date=datetime(2024, 1, 1),
     catchup=False,
-    max_active_runs=2,
-    dagrun_timeout=timedelta(minutes=30),
+    is_paused_upon_creation=True,
+    dagrun_timeout=timedelta(minutes=60),
+    max_active_runs=1,
+    default_args={
+        "owner": "Google",
+        "depends_on_past": False,
+        "retries": 1,
+        "retry_delay": timedelta(minutes=1),
+        "sla": timedelta(minutes=55),
+    },
+    description="This Airflow DAG demonstrates the customizing existing operators.",
+    tags=["demo", "airflow", "bigquery", "custom"],
 ) as dag:
     
     # -------------------------------------------------------------------------
