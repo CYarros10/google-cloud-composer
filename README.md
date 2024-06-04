@@ -4,6 +4,11 @@ A collection of Google Cloud Composer assets
 
 ---
 
+## Latest
+
+*  [Cloud Composer release notes](https://cloud.google.com/composer/docs/release-notes)
+*  [Cloud Composer versions](https://cloud.google.com/composer/docs/concepts/versioning/composer-versions)
+
 ## Guides
 
 ### Composer Guides
