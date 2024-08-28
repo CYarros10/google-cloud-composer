@@ -30,7 +30,7 @@ from airflow.providers.google.cloud.transfers.gcs_to_local import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_dataflow_native_java"
 BUCKET_NAME = f"bucket_{DAG_ID}_{ENV_ID}".replace("_", "-")
 PUBLIC_BUCKET = "airflow-system-tests-resources"

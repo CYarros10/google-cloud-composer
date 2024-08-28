@@ -33,7 +33,7 @@ from airflow.providers.google.cloud.sensors.dataplex import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_dataplex_data_quality"
 LAKE_ID = f"test-lake-{ENV_ID}"
 LOCATION_REGION = "us-central1"

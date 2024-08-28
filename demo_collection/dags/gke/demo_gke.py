@@ -12,7 +12,7 @@ from airflow.providers.google.cloud.operators.kubernetes_engine import (
 )
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_gke"
 LOCATION_REGION = "us-central1"
 ZONE = f"{LOCATION_REGION}-a"

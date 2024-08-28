@@ -24,7 +24,7 @@ from airflow.utils.trigger_rule import TriggerRule
 
 DAG_ID = "demo_automl_vision_clss"
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 LOCATION_REGION = "us-central1"
 IMAGE_DISPLAY_NAME = f"automl-vision-clss-{ENV_ID}"
 MODEL_DISPLAY_NAME = f"automl-vision-clss-model-{ENV_ID}"

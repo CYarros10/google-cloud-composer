@@ -24,7 +24,7 @@ from airflow.utils.trigger_rule import TriggerRule
 
 DAG_ID = "demo_automl_dataset"
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 LOCATION_REGION = "us-central1"
 
 RESOURCE_DATA_BUCKET = "airflow-system-tests-resources"

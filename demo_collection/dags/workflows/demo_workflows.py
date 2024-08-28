@@ -18,7 +18,7 @@ from airflow.providers.google.cloud.sensors.workflows import WorkflowExecutionSe
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_cloud_workflows"
 LOCATION_REGION = "us-central1"
 WORKFLOW_ID = f"workflow-{DAG_ID}-{ENV_ID}".replace("_", "-")

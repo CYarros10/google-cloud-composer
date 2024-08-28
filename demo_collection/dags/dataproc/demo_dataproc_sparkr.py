@@ -12,7 +12,7 @@ from airflow.providers.google.cloud.operators.dataproc import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_dataproc_sparkr"
 JOB_FILE_URI = (
     "gs://airflow-system-tests-resources/dataproc/sparkr/dataproc-sparkr-job.r"

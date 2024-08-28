@@ -12,7 +12,7 @@ from airflow.providers.google.cloud.operators.cloud_composer import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_composer"
 LOCATION_REGION = "us-central1"
 ENVIRONMENT_ID = f"test-{DAG_ID}-{ENV_ID}".replace("_", "-")

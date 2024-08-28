@@ -20,7 +20,7 @@ from airflow.providers.google.cloud.operators.compute import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_cloud_compute"
 LOCATION_REGION = "us-central1"
 ZONE = f"{LOCATION_REGION}-b"

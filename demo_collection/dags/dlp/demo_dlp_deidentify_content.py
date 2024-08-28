@@ -18,7 +18,7 @@ from airflow.utils.trigger_rule import TriggerRule
 
 DAG_ID = "demo_dlp_deidentify_content"
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 CRYPTO_KEY_NAME = f"{DAG_ID}_{ENV_ID}"
 ITEM = ContentItem(
     table={

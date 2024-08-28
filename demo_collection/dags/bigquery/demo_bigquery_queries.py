@@ -21,7 +21,7 @@ from airflow.providers.google.cloud.operators.bigquery import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 LOCATION_REGION = "us-central1"
 QUERY_SQL_PATH = "resources/demo_bq_example_bigquery_query.sql"
 TABLE_1 = "table1"

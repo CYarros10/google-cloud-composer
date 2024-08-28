@@ -16,7 +16,7 @@ from airflow.utils.trigger_rule import TriggerRule
 
 DAG_ID = "demo_dlp_job"
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 JOB_ID = f"dlp_job_{ENV_ID}"
 INSPECT_CONFIG = InspectConfig(
     info_types=[{"name": "PHONE_NUMBER"}, {"name": "US_TOLLFREE_PHONE_NUMBER"}]

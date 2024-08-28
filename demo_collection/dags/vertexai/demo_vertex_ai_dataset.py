@@ -24,7 +24,7 @@ from airflow.providers.google.cloud.operators.vertex_ai.dataset import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_vertex_ai_dataset_ops"
 LOCATION_REGION = "us-central1"
 RESOURCE_DATA_BUCKET = "airflow-system-tests-resources"

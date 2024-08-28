@@ -9,7 +9,7 @@ from airflow.providers.google.cloud.transfers.oracle_to_gcs import OracleToGCSOp
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_oracle_to_gcs"
 BUCKET_NAME = f"bucket_{DAG_ID}_{ENV_ID}"
 FILENAME = "test_file"

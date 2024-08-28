@@ -29,7 +29,7 @@ from airflow.utils.trigger_rule import TriggerRule
 
 SERVICE_ACCOUNT = "488712714114-compute@developer.gserviceaccount.com"
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 LOCATION_REGION = "europe-north1"
 DAG_ID = "demo_datafusion"
 INSTANCE_NAME = f"df-{ENV_ID}".replace("_", "-")

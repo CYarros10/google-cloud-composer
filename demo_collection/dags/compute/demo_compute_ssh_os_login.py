@@ -16,7 +16,7 @@ from airflow.providers.ssh.operators.ssh import SSHOperator
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_cloud_compute_ssh_os_login"
 LOCATION_REGION = "us-central1"
 ZONE = f"{LOCATION_REGION}-b"

@@ -9,7 +9,7 @@ from airflow.providers.google.cloud.operators.vertex_ai.generative_model import 
     PromptMultimodalModelOperator,
 )
 
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 LOCATION_REGION = "us-central1"
 DAG_ID = "demo_vertex_ai_generative_model"
 with models.DAG(

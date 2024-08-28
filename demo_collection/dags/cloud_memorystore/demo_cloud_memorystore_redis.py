@@ -27,7 +27,7 @@ from airflow.providers.google.cloud.operators.gcs import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 ENV_ID_LOWER = ENV_ID.lower() if ENV_ID else ""
 DAG_ID = "demo_cloud_memorystore_redis"
 BUCKET_NAME = f"bucket_{DAG_ID}_{ENV_ID}"

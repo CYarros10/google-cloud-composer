@@ -12,7 +12,7 @@ from airflow.providers.google.cloud.operators.dataproc import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_dataproc_spark_sql"
 CLUSTER_NAME = f"dataproc-spark-sql-{ENV_ID}"
 LOCATION_REGION = "us-central1"

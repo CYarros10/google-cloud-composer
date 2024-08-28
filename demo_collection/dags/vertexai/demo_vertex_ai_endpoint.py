@@ -30,7 +30,7 @@ from airflow.providers.google.cloud.operators.vertex_ai.endpoint_service import 
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_vertex_ai_endpoint_service_ops"
 LOCATION_REGION = "us-central1"
 IMAGE_DISPLAY_NAME = f"auto-ml-image-{ENV_ID}"

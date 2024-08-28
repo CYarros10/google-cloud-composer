@@ -9,7 +9,7 @@ from airflow.providers.google.cloud.operators.vertex_ai.auto_ml import (
 )
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_vertex_ai_auto_ml_ops"
 LOCATION_REGION = "us-central1"
 with DAG(

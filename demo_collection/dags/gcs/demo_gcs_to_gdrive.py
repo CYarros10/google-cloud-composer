@@ -30,7 +30,7 @@ from airflow.settings import Session
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 FOLDER_ID = os.environ.get("GCP_GDRIVE_FOLDER_ID", "root")
 DAG_ID = "demo_gcs_to_gdrive"
 BUCKET_NAME = f"bucket_{DAG_ID}_{ENV_ID}"

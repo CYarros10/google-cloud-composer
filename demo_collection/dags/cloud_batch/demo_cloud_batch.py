@@ -15,7 +15,7 @@ from airflow.providers.google.cloud.operators.cloud_batch import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_cloud_batch"
 LOCATION_REGION = "us-central1"
 job_name_prefix = "batch-system-test-job"

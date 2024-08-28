@@ -19,7 +19,7 @@ from airflow.providers.google.cloud.operators.cloud_build import (
 )
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_cloud_build"
 GCP_SOURCE_ARCHIVE_URL = "gs://airflow-system-tests-resources/cloud-build/file.tar.gz"
 GCP_SOURCE_REPOSITORY_NAME = "test-cloud-build-repo"

@@ -21,11 +21,11 @@ resource "google_project_service" "composer_api" {
 #   worker_max_count                  = var.worker_max_count
 # }
 
-module "composer-alerting" {
-  source                            = "./modules/composer-alerting"  
-  project_id                        = var.project_id
-  notification_email                = var.notification_email
-}
+# module "composer-alerting" {
+#   source                            = "./modules/composer-alerting"  
+#   project_id                        = var.project_id
+#   notification_email                = var.notification_email
+# }
 
 module "composer-2" {
   source                            = "./modules/composer2"

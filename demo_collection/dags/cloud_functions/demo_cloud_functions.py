@@ -13,7 +13,7 @@ from airflow.providers.google.cloud.operators.functions import (
 )
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_cloud_function"
 LOCATION_REGION = "us-central1"
 SHORT_FUNCTION_NAME = "hello_world"

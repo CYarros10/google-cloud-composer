@@ -24,7 +24,7 @@ timestr = time.strftime("%Y%m%d-%H%M%S")
 # Begin DAG Generation
 # -------------------------
 
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 LOCATION_REGION = "us-central1"
 CLUSTER_NAME = "demo-flink-cluster"
 GCS_BUCKET_NAME = "your-bucket-name"

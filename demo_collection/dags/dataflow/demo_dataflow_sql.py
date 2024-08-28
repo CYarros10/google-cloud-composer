@@ -17,7 +17,7 @@ from airflow.providers.google.cloud.operators.dataflow import (
 )
 from airflow.utils.trigger_rule import TriggerRule
 
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 ENV_ID = "composer"
 DAG_ID = "demo_dataflow_sql"
 LOCATION_REGION = "us-central1"

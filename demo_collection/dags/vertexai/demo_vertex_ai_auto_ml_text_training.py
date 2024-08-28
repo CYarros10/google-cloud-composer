@@ -23,7 +23,7 @@ from airflow.providers.google.cloud.operators.vertex_ai.dataset import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_vertex_ai_auto_ml_ops"
 LOCATION_REGION = "us-central1"
 TEXT_DISPLAY_NAME = f"auto-ml-text-{ENV_ID}"

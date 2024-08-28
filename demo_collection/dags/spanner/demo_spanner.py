@@ -15,7 +15,7 @@ from airflow.providers.google.cloud.operators.spanner import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_spanner"
 GCP_SPANNER_INSTANCE_ID = f"instance-{DAG_ID}-{ENV_ID}".replace("_", "-")
 GCP_SPANNER_DATABASE_ID = f"database-{DAG_ID}-{ENV_ID}".replace("_", "-")

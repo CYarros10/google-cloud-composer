@@ -28,7 +28,7 @@ from airflow.providers.google.cloud.transfers.local_to_gcs import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 LOCATION_REGION = "us-central1"
 DAG_ID = "demo_dataflow_native_go_async"
 BUCKET_NAME = f"bucket_{DAG_ID}_{ENV_ID}".replace("_", "-")

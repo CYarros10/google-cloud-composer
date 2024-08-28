@@ -15,7 +15,7 @@ from airflow.providers.google.cloud.transfers.gcs_to_bigquery import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_gcs_to_bigquery_operator_async"
 DATASET_NAME_STR = f"dataset_{DAG_ID}_{ENV_ID}_STR"
 DATASET_NAME_DATE = f"dataset_{DAG_ID}_{ENV_ID}_DATE"

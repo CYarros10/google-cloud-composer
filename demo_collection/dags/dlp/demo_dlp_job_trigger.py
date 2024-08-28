@@ -15,7 +15,7 @@ from airflow.utils.trigger_rule import TriggerRule
 
 DAG_ID = "demo_dlp_job_trigger"
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 JOB_TRIGGER = {
     "inspect_job": {
         "storage_config": {

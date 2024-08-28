@@ -18,7 +18,7 @@ from airflow.providers.google.cloud.operators.vertex_ai.hyperparameter_tuning_jo
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_vertex_ai_hyperparameter_tuning_job_ops"
 LOCATION_REGION = "us-central1"
 DISPLAY_NAME = f"hyperparameter-tuning-job-{ENV_ID}"

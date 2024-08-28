@@ -23,7 +23,7 @@ from airflow.providers.google.cloud.operators.vertex_ai.dataset import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_automl_vision_obj_detect"
 LOCATION_REGION = "us-central1"
 IMAGE_DISPLAY_NAME = f"automl-vision-detect-{ENV_ID}"

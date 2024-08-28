@@ -32,7 +32,7 @@ from airflow.providers.google.cloud.transfers.local_to_gcs import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_bigquery_dts"
 BUCKET_NAME = f"bucket-{DAG_ID}-{ENV_ID}"
 FILE_NAME = "demo_bq_us-states.csv"

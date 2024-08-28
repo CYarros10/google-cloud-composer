@@ -25,7 +25,7 @@ from airflow.utils.trigger_rule import TriggerRule
 
 DAG_ID = "demo_automl_translate"
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 LOCATION_REGION = "us-central1"
 DATA_SAMPLE_GCS_BUCKET_NAME = f"bucket_{DAG_ID}_{ENV_ID}".replace("_", "-")
 RESOURCE_DATA_BUCKET = "airflow-system-tests-resources"

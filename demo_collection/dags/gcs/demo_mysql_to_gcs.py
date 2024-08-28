@@ -35,7 +35,7 @@ try:
 except ImportError:
     pytest.skip("MySQL not available", allow_module_level=True)
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_mysql_to_gcs"
 REGION = "europe-west2"
 ZONE = REGION + "-a"

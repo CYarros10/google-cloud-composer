@@ -23,7 +23,7 @@ from airflow.providers.google.cloud.operators.cloud_memorystore import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_cloud_memorystore_memcached"
 MEMORYSTORE_MEMCACHED_INSTANCE_NAME = f"memcached-{ENV_ID}-1"
 LOCATION_REGION = "us-central1"

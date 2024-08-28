@@ -44,7 +44,7 @@ from airflow.providers.google.cloud.sensors.bigtable import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_bigtable"
 CBT_INSTANCE_ID = f"bigtable-instance-id-{ENV_ID}"
 CBT_INSTANCE_DISPLAY_NAME = "Instance-name"

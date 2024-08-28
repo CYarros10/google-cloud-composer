@@ -20,7 +20,7 @@ from airflow.providers.google.cloud.transfers.trino_to_gcs import TrinoToGCSOper
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-GCP_PROJECT_ID = "cy-artifacts"
+GCP_PROJECT_ID = "your-project"
 DAG_ID = "demo_trino_to_gcs"
 GCS_BUCKET = f"bucket_{DAG_ID}_{ENV_ID}"
 DATASET_NAME = f"dataset_{DAG_ID}_{ENV_ID}"

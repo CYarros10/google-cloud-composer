@@ -16,7 +16,7 @@ from airflow.providers.google.cloud.sensors.dataproc import DataprocBatchSensor
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_dataproc_batch"
 LOCATION_REGION = "us-central1"
 BATCH_ID = f"batch-{ENV_ID}-{DAG_ID}".replace("_", "-")

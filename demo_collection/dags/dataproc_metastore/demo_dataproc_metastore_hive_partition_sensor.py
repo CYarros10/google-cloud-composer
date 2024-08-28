@@ -27,7 +27,7 @@ from airflow.utils.trigger_rule import TriggerRule
 
 DAG_ID = "demo_dpms_hive_partition_sensor"
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 LOCATION_REGION = "us-central1"
 NETWORK = "default"
 METASTORE_SERVICE_ID = f"metastore-{DAG_ID}-{ENV_ID}".replace("_", "-")

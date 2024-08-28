@@ -26,7 +26,7 @@ from airflow.utils.trigger_rule import TriggerRule
 
 DAG_ID = "demo_dpms"
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 SERVICE_ID = f"{DAG_ID}-service-{ENV_ID}".replace("_", "-")
 METADATA_IMPORT_ID = f"{DAG_ID}-metadata-{ENV_ID}".replace("_", "-")
 LOCATION_REGION = "us-central1"

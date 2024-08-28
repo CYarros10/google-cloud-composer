@@ -22,7 +22,7 @@ from airflow.providers.google.cloud.operators.tasks import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 LOCATION_REGION = "us-central1"
 DAG_ID = "demo_cloud_tasks"
 timestamp = timestamp_pb2.Timestamp()

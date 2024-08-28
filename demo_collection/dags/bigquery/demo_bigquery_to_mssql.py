@@ -15,7 +15,7 @@ from airflow.providers.google.cloud.transfers.bigquery_to_mssql import (
 )
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_bigquery_to_mssql"
 DATASET_NAME = f"dataset_{DAG_ID}_{ENV_ID}"
 TABLE = "table_42"

@@ -11,7 +11,7 @@ from airflow.providers.google.cloud.operators.kubernetes_engine import (
 )
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_gke_kueue"
 LOCATION_REGION = "us-central1"
 CLUSTER_NAME = f"cluster-name-test-kueue-{ENV_ID}".replace("_", "-")

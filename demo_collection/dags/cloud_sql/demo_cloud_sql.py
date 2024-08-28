@@ -28,7 +28,7 @@ from airflow.providers.google.cloud.operators.gcs import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_cloudsql"
 LOCATION_REGION="us-central1"
 INSTANCE_NAME = f"{DAG_ID}-{ENV_ID}-instance".replace("_", "-")

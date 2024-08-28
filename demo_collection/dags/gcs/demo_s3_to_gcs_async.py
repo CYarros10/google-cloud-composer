@@ -15,7 +15,7 @@ from airflow.providers.google.cloud.transfers.s3_to_gcs import S3ToGCSOperator
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-GCP_PROJECT_ID = "cy-artifacts"
+GCP_PROJECT_ID = "your-project"
 DAG_ID = "demo_s3_to_gcs"
 BUCKET_NAME = f"bucket_{DAG_ID}_{ENV_ID}"
 GCS_BUCKET_URL = f"gs://{BUCKET_NAME}/"

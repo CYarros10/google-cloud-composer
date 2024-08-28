@@ -20,7 +20,7 @@ from airflow.providers.google.cloud.operators.bigquery import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_bigquery_queries_async"
 DATASET_NAME = f"dataset_{DAG_ID}_{ENV_ID}".replace("-", "_")
 LOCATION_REGION = "us"

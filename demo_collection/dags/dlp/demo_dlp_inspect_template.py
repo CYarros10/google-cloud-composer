@@ -17,7 +17,7 @@ from airflow.utils.trigger_rule import TriggerRule
 
 DAG_ID = "demo_dlp_inspect_template"
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 TEMPLATE_ID = f"dlp-inspect-{ENV_ID}"
 ITEM = ContentItem(
     table={

@@ -14,7 +14,7 @@ from airflow.utils.trigger_rule import TriggerRule
 
 DAG_ID = "demo_dataproc_cluster_operations"
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 CLUSTER_NAME = f"cluster-{ENV_ID}-{DAG_ID}".replace("_", "-")
 LOCATION_REGION = "us-central1"
 CLUSTER_CONFIG = {

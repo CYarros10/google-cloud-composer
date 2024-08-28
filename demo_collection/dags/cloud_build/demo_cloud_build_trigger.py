@@ -18,7 +18,7 @@ from airflow.providers.google.cloud.operators.cloud_build import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_cloud_build_trigger"
 GCP_SOURCE_REPOSITORY_NAME = "test-cloud-build-repo"
 TRIGGER_NAME = f"cloud-build-trigger-{ENV_ID}"

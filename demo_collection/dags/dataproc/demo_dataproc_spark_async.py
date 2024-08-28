@@ -13,7 +13,7 @@ from airflow.providers.google.cloud.sensors.dataproc import DataprocJobSensor
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_dataproc_spark_async"
 CLUSTER_NAME = f"cluster-{ENV_ID}-{DAG_ID}".replace("_", "-")
 LOCATION_REGION = "us-central1"

@@ -11,7 +11,7 @@ from airflow.providers.google.cloud.operators.dataproc import (
 )
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_dataproc_wf"
 LOCATION_REGION = "us-central1"
 CLUSTER_NAME = f"cluster-{ENV_ID}-{DAG_ID}".replace("_", "-")

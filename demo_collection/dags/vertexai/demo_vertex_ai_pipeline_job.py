@@ -20,7 +20,7 @@ from airflow.providers.google.cloud.operators.vertex_ai.pipeline_job import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_vertex_ai_pipeline_job_ops"
 LOCATION_REGION = "us-central1"
 DISPLAY_NAME = f"pipeline-job-{ENV_ID}"

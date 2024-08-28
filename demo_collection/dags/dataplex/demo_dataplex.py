@@ -25,7 +25,7 @@ from airflow.providers.google.cloud.sensors.dataplex import DataplexTaskStateSen
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_dataplex"
 BUCKET_NAME = f"bucket_{DAG_ID}_{ENV_ID}"
 SPARK_FILE_NAME = "spark_example_pi.py"

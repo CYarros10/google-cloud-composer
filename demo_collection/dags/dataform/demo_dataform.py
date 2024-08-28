@@ -35,7 +35,7 @@ from airflow.providers.google.cloud.utils.dataform import (
 from airflow.utils.trigger_rule import TriggerRule
 
 ENV_ID = "composer"
-PROJECT_ID = "cy-artifacts"
+PROJECT_ID = "your-project"
 DAG_ID = "demo_dataform"
 REPOSITORY_ID = f"example_dataform_repository_{ENV_ID}"
 LOCATION_REGION = "us-central1"
