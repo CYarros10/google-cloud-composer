@@ -39,6 +39,6 @@ with models.DAG(
             SET is_paused = true 
             WHERE 
                 dag_id != 'airflow_monitoring' AND 
-                dag_id != 'pause_all_dags_dag';
+                dag_id != 'pause_all_dags';
             """
     )
