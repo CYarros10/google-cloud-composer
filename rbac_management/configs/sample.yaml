@@ -1,0 +1,331 @@
+
+    # gcloud composer environments describe your-composer-environment \
+    #  --location=your-composer-location \
+    #  --format="value(config.airflowUri)"
+
+web_server_url: your-composer-web-server-url
+
+# -----------------------------------------------------------------------------
+
+roles:
+  - name: Admin
+    permissions:
+      can_create:
+        - Users
+        - Roles
+        - DAG Runs
+        - Variables
+        - Connections
+        - Pools
+        - Task Instances
+        - Datasets
+      can_read:
+        - Passwords
+        - My Password
+        - My Profile
+        - Users
+        - Roles
+        - User Stats Chart
+        - Permissions
+        - View Menus
+        - Permission Views
+        - DAG Runs
+        - Jobs
+        - Audit Logs
+        - Variables
+        - Task Instances
+        - Task Reschedules
+        - Triggers
+        - Configurations
+        - Connections
+        - SLA Misses
+        - Plugins
+        - Providers
+        - Pools
+        - XComs
+        - DAG Dependencies
+        - DAGs
+        - Cluster Activity
+        - Datasets
+        - DAG Code
+        - ImportError
+        - DAG Warnings
+        - Task Logs
+        - Website
+      can_edit:
+        - Passwords
+        - My Password
+        - My Profile
+        - Users
+        - Roles
+        - DAG Runs
+        - Variables
+        - Task Instances
+        - Task Reschedules
+        - Connections
+        - SLA Misses
+        - Pools
+        - XComs
+        - Datasets
+        - DAGs
+      can_delete:
+        - Users
+        - Roles
+        - DAG Runs
+        - Variables
+        - Task Instances
+        - Connections
+        - SLA Misses
+        - Pools
+        - XComs
+        - DAGs
+        - Datasets
+      menu_access:
+        - List Users
+        - Security
+        - List Roles
+        - User's Statistics
+        - Actions
+        - Resources
+        - Permission Pairs
+        - DAG Runs
+        - Browse
+        - Jobs
+        - Audit Logs
+        - Variables
+        - Admin
+        - Task Instances
+        - Task Reschedules
+        - Triggers
+        - Configurations
+        - Connections
+        - SLA Misses
+        - Plugins
+        - Providers
+        - Pools
+        - XComs
+        - DAG Dependencies
+        - DAGs
+        - Cluster Activity
+        - Datasets
+        - Documentation
+        - Docs
+        - Composer Documentation
+        - Composer Menu
+        - DAGs in Cloud Console
+        - DAGs in Cloud Storage
+        - Environment Monitoring
+        - Environment Logs
+
+  - name: Viewer
+    permissions:
+      can_read:
+        - DAG Code
+        - Cluster Activity
+        - ImportError
+        - DAG Warnings
+        - DAGs
+        - DAG Dependencies
+        - DAG Runs
+        - Datasets
+        - Pools
+        - Jobs
+        - My Password
+        - My Profile
+        - SLA Misses
+        - Task Instances
+        - Task Logs
+        - XComs
+        - Website
+      can_edit:
+        - My Password
+        - My Profile
+      menu_access:
+        - Browse
+        - DAGs
+        - DAG Dependencies
+        - DAG Runs
+        - Datasets
+        - Cluster Activity
+        - Documentation
+        - Docs
+        - Jobs
+        - SLA Misses
+        - Task Instances
+        - Composer Menu
+        - DAGs in Cloud Console
+        - DAGs in Cloud Storage
+        - Environment Monitoring
+        - Environment Logs
+        - Composer Documentation
+
+  - name: User
+    permissions:
+      can_create:
+        - Task Instances
+        - DAG Runs
+        - Datasets
+      can_read:
+        - DAGs
+        - DAG Dependencies
+        - DAG Code
+        - DAG Runs
+        - Datasets
+        - Cluster Activity
+        - Pools
+        - ImportError
+        - DAG Warnings
+        - Jobs
+        - My Password
+        - My Profile
+        - SLA Misses
+        - Task Instances
+        - Task Logs
+        - XComs
+        - Website
+      can_edit:
+        - My Password
+        - My Profile
+        - Task Instances
+        - DAGs
+        - DAG Runs
+      can_delete:
+        - DAGs
+        - Task Instances
+        - DAG Runs
+      menu_access:
+        - Browse
+        - DAGs
+        - DAG Dependencies
+        - DAG Runs
+        - Datasets
+        - Cluster Activity
+        - Documentation
+        - Docs
+        - Jobs
+        - SLA Misses
+        - Task Instances
+        - Composer Menu
+        - DAGs in Cloud Console
+        - DAGs in Cloud Storage
+        - Environment Monitoring
+        - Environment Logs
+        - Composer Documentation
+
+  - name: Op
+    permissions:
+      can_create:
+        - DAG Runs
+        - Variables
+        - Task Instances
+        - Connections
+        - Pools
+        - Datasets
+      can_read:
+        - My Password
+        - My Profile
+        - DAG Runs
+        - Jobs
+        - Variables
+        - Task Instances
+        - Configurations
+        - Connections
+        - SLA Misses
+        - Plugins
+        - Providers
+        - Pools
+        - XComs
+        - DAG Dependencies
+        - DAGs
+        - Cluster Activity
+        - Datasets
+        - DAG Code
+        - ImportError
+        - DAG Warnings
+        - Task Logs
+        - Website
+      can_edit:
+        - My Password
+        - My Profile
+        - DAG Runs
+        - Variables
+        - Task Instances
+        - Connections
+        - Pools
+        - Datasets
+        - DAGs
+      can_delete:
+        - DAG Runs
+        - Variables
+        - Task Instances
+        - Connections
+        - Pools
+        - XComs
+        - DAGs
+        - Datasets
+      menu_access:
+        - DAG Runs
+        - Browse
+        - Jobs
+        - Variables
+        - Admin
+        - Task Instances
+        - Configurations
+        - Connections
+        - SLA Misses
+        - Plugins
+        - Providers
+        - Pools
+        - XComs
+        - DAG Dependencies
+        - DAGs
+        - Cluster Activity
+        - Datasets
+        - Documentation
+        - Docs
+        - Composer Documentation
+        - Composer Menu
+        - DAGs in Cloud Console
+        - DAGs in Cloud Storage
+        - Environment Monitoring
+        - Environment Logs
+
+  - name: Public
+    permissions:
+      menu_access:
+        - Composer Menu
+        - DAGs in Cloud Console
+        - DAGs in Cloud Storage
+        - Environment Monitoring
+        - Environment Logs
+        - Composer Documentation
+
+  - name: Test1
+    permissions:
+      menu_access:
+        - Composer Menu
+
+# -----------------------------------------------------------------------------
+
+users:
+  - username: admin_user
+    first_name: Admin
+    last_name: User
+    email: admin@example.com
+    roles:
+      - Admin
+
+  - username: operator_user
+    first_name: Operator
+    last_name: User
+    email: operator@example.com
+    roles:
+      - Op
+
+  - username: regular_user
+    first_name: Regular
+    last_name: User
+    email: user@example.com
+    roles:
+      - User
+      - Viewer

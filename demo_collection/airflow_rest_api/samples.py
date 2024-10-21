@@ -9,6 +9,7 @@ import json
 import google.auth
 from google.auth.transport.requests import AuthorizedSession
 import requests
+from datetime import datetime, timedelta
 
 
 # Following GCP best practices, these credentials should be
@@ -164,6 +165,7 @@ def trigger_dag(web_server_url: str, dag_id: str, data: dict) -> str:
         response.raise_for_status()
     else:
         return response.text
+
 
 if __name__ == "__main__":
 
